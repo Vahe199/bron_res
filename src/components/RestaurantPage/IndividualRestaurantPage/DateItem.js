@@ -113,6 +113,7 @@ let newDate = new Date()
                 <DateTimePicker
                     value={date}
                     locale={"ru-RU"}
+                    timeZoneOffsetInMinutes={0}
                     mode={'datetime'}
                     display={'spinner'}
                     is24Hour={true}
@@ -133,6 +134,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 1,
         justifyContent: 'center',
+        marginHorizontal:10
         // padding: 50,
     },
     pickedDateContainer: {

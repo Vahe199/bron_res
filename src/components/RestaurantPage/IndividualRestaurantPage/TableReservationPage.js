@@ -8,11 +8,11 @@ import {
     Text,
     View
 } from "react-native";
-import {DateFilter} from "./DateItem";
 import {TimesItem} from "./TimesItem";
 import {ReserveForm} from "./ReserveForm";
 import {Header} from "../../Include/Header";
 import {LayoutTable} from "./LayoutTable";
+import {DateFilter} from "./DateItemed";
 
 export const TableReservationPage = (props) => {
     let tableNumber = props.route.params ? Number(props.route.params.split(' ')[1]): 6;
