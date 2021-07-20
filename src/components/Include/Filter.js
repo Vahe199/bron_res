@@ -28,7 +28,7 @@ const {category} = useSelector(state => state.topPage)
                       data={category}
                       keyExtractor={(item,index) => index.toString()}
                       renderItem={({item}) => (
-                          <TouchableOpacity activeOpacity={0.5} key={item.id}
+                          <TouchableOpacity activeOpacity={0.5} key={item.id} disabled={props.visible}
                                             onPress={()=>getCategoryHandler(item.name)}
                                             style={styles. FilterBtn} >
                               <Text style={styles.textBtn}>{item.name}</Text>

@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import {combineReducers} from "redux";
 import {topPageReducer} from "./action/topRestaurant-action";
 import {restaurantReducer} from "./action/restaurant-action";
+import {individualRestaurantReducer} from "./action/individualrestaurant-action";
 
 
 
@@ -11,7 +12,8 @@ import {restaurantReducer} from "./action/restaurant-action";
 
 const reducer = combineReducers({
     topPage:topPageReducer,
-    restaurantPage:restaurantReducer
+    restaurantPage:restaurantReducer,
+    individualPage:individualRestaurantReducer
 
 });
 

@@ -7,8 +7,9 @@ const individualRestHandler = (resName) => {
     navigation.push('Individual Rest',resName)
 }
     return (
-        <TouchableOpacity activeOpacity={0.5}
+        <TouchableOpacity activeOpacity={0.8}
                           onPress={()=>individualRestHandler(el.name)}
+
             // onLongPress={longPressHandler}
         >
                   <View style={styles.container}>

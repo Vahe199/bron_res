@@ -1,15 +1,22 @@
 import React from "react";
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {Image, Linking, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
 import {LinearGradient} from "expo-linear-gradient";
 import arrowBack from "../../../assets/images/Back.png"
+import phone from "../../../assets/images/phoneIcon.png"
 import {SearchQuery} from "./SearchQuery";
-
 export const Header = (props) => {
+    console.log(props,556565)
     const [searchQuery, setSearchQuery] = React.useState('');
     const [searchShow, setSearchShow] = React.useState(false);
     const [filterData, setFilterData] = React.useState([]);
     const [masterData, setMasterData] = React.useState([]);
+  const dialCall = (number) => {
+        let phoneNumber = '';
+        if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
+        else {phoneNumber = `telprompt:${number}`; }
+        Linking.openURL(phoneNumber);
+    };
     const searchFilter = (text) => {
         if (text) {
             const newData = masterData.filter((item) => {
@@ -45,12 +52,12 @@ export const Header = (props) => {
     return (
         <View style={styles.container}>
             <LinearGradient
-                colors={['#f16909', '#f9a61f']}
+                colors={['#F16708','#FAB023' ]}
                 start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
+                end={{x: 1.2, y: 0}}
                 style={styles.background}>
                 <View style={styles.header}>
-                    {props.title ? <TouchableOpacity onPress={() => props.navigation.goBack()} activeOpacity={0.5}>
+                    {props.route && props.route.name === "Reservation Table" ? <TouchableOpacity onPress={() => props.navigation.goBack()} activeOpacity={0.5}>
                             <Image source={arrowBack} style={styles.iconImg}/>
                         </TouchableOpacity>
                         : <MaterialIcons name='menu' size={35} onPress={() => props.navigation.openDrawer()}
@@ -60,7 +67,10 @@ export const Header = (props) => {
                                              onChangeText={searchFilter}
                                              value={searchQuery}
                     /> : <Text style={styles.headerText}>{props.title ? props.title : props.scene.route.name}</Text>}
-                    <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>
+                    {props.title === "Room 1"? <TouchableOpacity onPress={() =>dialCall(+37499069020)}>
+                        <Image source={phone} style={{width: 27, height: 27}}/>
+                        </TouchableOpacity>:
+                    <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>}
                 </View>
             </LinearGradient>
             {searchShow && <View style={styles.searchQuery}>
@@ -72,11 +82,10 @@ export const Header = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#f16708',
+        backgroundColor: '#F16708',
         alignItems: 'flex-end',
         elevation:10,
-        zIndex:2,
-        display:'flex'
+        zIndex:3,
     },
     background: {
         width: '100%',

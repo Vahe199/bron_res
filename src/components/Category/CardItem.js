@@ -6,8 +6,9 @@ function CardItem({ el,navigation}) {
         navigation.push('Individual Rest',el.name)
     }
     return (
-        <TouchableOpacity activeOpacity={0.5}
+        <TouchableOpacity activeOpacity={0.9}
                          onPress={longPressHandler}
+                          style={{backgroundColor:'#FFF'}}
            // onLongPress={longPressHandler}
         >
             <Card containerStyle={styles.card} >
@@ -35,6 +36,8 @@ const styles= StyleSheet.create({
         borderRadius:20,
         padding:0,
         margin: "auto",
+        marginRight:5,
+        marginBottom: 5
     },
     cardImages:{
         width:'100%',

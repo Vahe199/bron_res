@@ -31,13 +31,13 @@ function RestaurantsScreen(props) {
         setChooseData(city)
     }
     React.useEffect(() => {
-       // LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     }, [])
 
     return (
         <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={{flex: 1}}>
-            <SafeAreaView style={{flex: 1}}>
-                <ScrollView contentContainerStyle={styles.contentContainer}>
+            <SafeAreaView style={{flex: 1}} >
+                <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.container}>
                         <View style={styles.touchable}>
                             <TouchableOpacity style={[styles.button,styles.touchableOpacity]} activeOpacity={0.5}
@@ -51,7 +51,7 @@ function RestaurantsScreen(props) {
                             </View>
                         </View>
                         <View style={styles.filter}>
-                            <Filter {...props}/>
+                           <Filter {...props} visible={isModalVisible}/>
                         </View>
                         <View style={styles.wrapper}>
                             <Text style={[styles.text]}>Near me</Text>
@@ -69,9 +69,11 @@ function RestaurantsScreen(props) {
                             </View>
 
                             <Text style={styles.text}>Top restaurants</Text>
-                            <FlatList data={topRest} keyExtractor={(item, index) => index.toString()}
+                            <FlatList showsVerticalScrollIndicator={false}
+                                data={topRest} keyExtractor={(item, index) => index.toString()}
                                       renderItem={({item}) => (
                                           <RestItem el={item} key={item.id} {...props}/>
+
                                       )}/>
                         </View>
                     </View>

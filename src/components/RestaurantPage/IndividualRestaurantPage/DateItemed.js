@@ -1,21 +1,27 @@
 import React, {useState} from 'react';
-import {View, Platform, TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {View, Platform, Text, StyleSheet, Image} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {AntDesign} from "@expo/vector-icons";
-import moment from "moment";
+import calendar from "../../../../assets/images/calendar.png"
+import {Divider} from "react-native-elements";
+import {TouchableOpacity} from "react-native-gesture-handler";
+
 export const DateFilter = () => {
     const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState('date');
+    const [mode, setMode] = useState('');
     const [show, setShow] = useState(false);
     const [time, setTime] = useState(new Date());
 
     const onChange = (event, selectedValue) => {
         setShow(Platform.OS === 'ios');
-        if (mode == 'date') {
+       if(mode === 'datetime'){
+           console.log(selectedValue,mode,889)
+           setTime(selectedValue);
+           setDate(selectedValue);
+       } else if (mode == 'date') {
             const currentDate = selectedValue || new Date();
             setDate(currentDate);
             setMode('time');
-            setShow(Platform.OS !== 'ios'); // to show the picker again in time mode
+             setShow(Platform.OS !== 'ios'); // to show the picker again in time mode
         } else {
             const selectedTime = selectedValue || new Date();
             setTime(selectedTime);
@@ -29,22 +35,23 @@ export const DateFilter = () => {
     };
 
     const showDatepicker = () => {
-        showMode('date');
+        console.log(Platform)
+        if(Platform.OS == "android"){
+            showMode('date');
+            console.log(Platform)
+        }else {
+            showMode('datetime');
+        }
     };
 
-    const showTimepicker = () => {
-        showMode('time');
-    };
-    const formatDate = (date, time) => {
-        console.log(date, time)
-        return `${date.getDate()}/${date.getMonth() +
-        1}/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
-    };
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={showDatepicker} style={styles.pickedDateContainer}>
-                <Text style={styles.pickedDate}>{formatDate(date, time)}</Text>
-                <AntDesign name="calendar" size={24} color="#0d6efd" />
+            <TouchableOpacity onPress={showDatepicker} style={styles.pickedDateContainer} activeOpacity={0.7}>
+                <Text style={styles.pickedDate}>{date.getDate()}/{date.getMonth() +1}/{date.getFullYear()}</Text>
+                <Divider orientation="vertical" width={1} style={styles.divider} />
+                <Text style={styles.pickedDate}>{time.getHours()}:{time.getMinutes()}</Text>
+                <Divider orientation="vertical" width={1} style={styles.divider} />
+                <Image source={calendar} style={{width:35,height:29}}/>
             </TouchableOpacity>
             {show && (
                 <DateTimePicker
@@ -64,26 +71,35 @@ export const DateFilter = () => {
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
         flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        marginHorizontal:10,
         marginTop:10
-        // padding: 50,
     },
     pickedDateContainer: {
         flexDirection:'row',
-        padding: 20,
-        backgroundColor: '#eee',
-        borderRadius: 10,
-        elevation:5
+       paddingVertical:12,
+        paddingHorizontal:20,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 7,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
+
     },
     pickedDate: {
-        marginRight:15,
-        fontSize: 16,
+        fontSize: 20,
         color: 'black',
+    },
+    divider:{
+        marginLeft: 10,
+        marginRight:10
     },
     // This only works on iOS
     datePicker: {

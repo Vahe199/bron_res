@@ -1,13 +1,12 @@
 import React from "react";
 import {
     ImageBackground,
-    ScrollView,
     StyleSheet,
     Text, TouchableOpacity,
     View
 } from "react-native";
 import {Header} from "../../Include/Header";
-import {LayoutTable} from "./LayoutTable";
+import {RoomItem} from "./RoomItem";
 
 
 export const IndividualRestaurantPage = (props) => {
@@ -16,30 +15,18 @@ export const IndividualRestaurantPage = (props) => {
                 <View>
                     <Header title={props.route.params}{...props}/>
                 </View>
-                <ScrollView contentContainerStyle={{paddingVertical: 1}}>
                     <View style={styles.container}>
-                        <View style={styles.floorPlan}>
-                            <LayoutTable {...props}/>
-                        </View>
+                            <RoomItem/>
+                            {/*<LayoutTable {...props}/>*/}
+
                         <View>
-                            <Text style={styles.description}>Description</Text>
-                            <Text style={{textAlign: 'center'}}>
-                                Lorem ipsum — классический текст -«рыба» (условный, зачастую бессмысленный
-                                текст-заполнитель, вставляемый в макет страницы). Является искажённым отрывком из
-                                философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45
-                                году до н. э. на латинском языке, обнаружение сходства приписывается Ричарду
-                                МакКлинтоку[1].
-                            </Text>
-                        </View>
-                        <View>
-                            <TouchableOpacity activeOpacity={0.5}
+                            <TouchableOpacity activeOpacity={0.7}
                                               onPress={() => props.navigation.navigate('Reservation Table', 'Room 1')}
                                               style={styles.button}>
                                 <Text style={styles.textBtn}>Reserve a table</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
-                </ScrollView>
         </ImageBackground>
     )
 }
@@ -50,7 +37,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20
+         paddingBottom: 60
     },
 
     floorPlan: {

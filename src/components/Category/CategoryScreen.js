@@ -15,7 +15,7 @@ const CategoryScreen = (props) => {
             <View style={{zIndex:1}}>
                 <Header title={title + ' ' + 'Bar'}{...props}/>
             </View>
-            <ScrollView contentContainerStyle={styles.contentContainer}>
+            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
             <View style={styles.container} >
                 <View style={styles.filter}>
                     <Filter {...props}/>
@@ -23,6 +23,7 @@ const CategoryScreen = (props) => {
                 <View style={styles.list}>
 
                     <FlatList numColumns={2}
+                              showsVerticalScrollIndicator={false}
                         data={ restaurant} keyExtractor={(item, index) => index.toString()}
                               renderItem={({item}) => (
                                   <CardItem el={item} key={item.id}{...props}/>

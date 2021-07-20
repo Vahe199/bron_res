@@ -5,10 +5,10 @@ import {
     SafeAreaView,
     ScrollView,
     StyleSheet,
-    Text,
+    Text, TouchableOpacity,
     View
 } from "react-native";
-import {TimesItem} from "./TimesItem";
+import {RoomItem} from "./RoomItem";
 import {ReserveForm} from "./ReserveForm";
 import {Header} from "../../Include/Header";
 import {LayoutTable} from "./LayoutTable";
@@ -19,35 +19,32 @@ export const TableReservationPage = (props) => {
     const [count, setCount] = React.useState(tableNumber)
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
-        <SafeAreaView style={{flex: 1}}>
             <View>
-            <Header title={props.route.params }{...props}/>
+                <Header title={props.route.params }{...props}/>
             </View>
+        <SafeAreaView style={{flex: 1}}>
             <ScrollView contentContainerStyle={{paddingVertical: 1}}>
         <View style={styles.container}>
             <View style={styles.floorPlan}>
                     <LayoutTable {...props}/>
             </View>
             <View style={styles.resDate}>
-                <Text style={styles.text}>Data of reservation</Text>
+                <Text style={styles.text}>Date and time of reservation</Text>
                    <DateFilter {...props}/>
             </View>
             <View style={styles.numGuest}>
                 <Text style={styles.text}>Number of Guests</Text>
                 <View style={{flexDirection: 'row', paddingVertical: 10}}>
-                    <Pressable style={[styles.button, styles.btnLeft]}
+                    <TouchableOpacity style={[styles.button, styles.btnLeft]} activeOpacity={0.7}
                                onPress={() => setCount(((count - 1 === 0 ? count : count - 1)))}>
-                        <Text style={styles.text}>-</Text>
-                    </Pressable>
+                        <Text style={{fontSize:26}}>-</Text>
+                    </TouchableOpacity>
                     <Text style={styles.textInput}>{count}</Text>
-                    <Pressable style={[styles.button, styles.btnRight]} onPress={() => setCount(count + 1)}>
-                        <Text style={styles.text}>+</Text>
-                    </Pressable>
+                    <TouchableOpacity style={[styles.button, styles.btnRight]} activeOpacity={0.7}
+                                      onPress={() => setCount(count + 1)}>
+                        <Text style={{fontSize:22}}>+</Text>
+                    </TouchableOpacity>
                 </View>
-            </View>
-            <View style={styles.availableTimes}>
-                <Text style={styles.text}>Available times</Text>
-                <TimesItem {...props}/>
             </View>
             <View style={styles.reserveForm}>
                  <ReserveForm {...props}/>
@@ -70,17 +67,24 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         height: 250,
         width: '100%',
-        padding: 4,
-        borderRadius:15,
-        borderWidth:1
+         padding: 2,
+         borderRadius:5,
+         borderWidth:0.2
     },
     button: {
         width:50,
         height:45,
         alignItems: 'center',
         justifyContent: 'center',
-        elevation: 3,
         backgroundColor: '#e5e5e5',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     btnRight:{
         borderTopRightRadius:10,
@@ -91,6 +95,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius:10,
     },
     text: {
+        marginLeft:8,
         fontSize: 20,
         lineHeight: 21,
         fontWeight: '600',
@@ -99,16 +104,22 @@ const styles = StyleSheet.create({
     textInput:{
         fontSize: 20,
         backgroundColor:'#f6f6f6',
-        width: 50,
-        height: 45,
-        paddingVertical:4,
+       marginHorizontal:2,
+         paddingVertical:9,
+        paddingHorizontal:18,
        textAlign:'center',
-        elevation: 3,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.32,
+        shadowRadius: 5.46,
+        elevation: 9,
 
     },
     resDate: {
         paddingVertical:20,
-
     },
     numGuest: {
         paddingVertical:10,
