@@ -6,10 +6,16 @@ import {
     View
 } from "react-native";
 import {Header} from "../../Include/Header";
-import {RoomItem} from "./RoomItem";
+import {RoomItem} from "./utilComponents/RoomItem";
+import {getIndividualRestaurantsData} from "../../../redux/action/individualrestaurant-action";
+import {useDispatch} from "react-redux";
 
 
 export const IndividualRestaurantPage = (props) => {
+    const dispatch = useDispatch()
+    React.useEffect (()=>{
+         dispatch(getIndividualRestaurantsData(props.route.params))
+    },[])
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
                 <View>
@@ -17,13 +23,11 @@ export const IndividualRestaurantPage = (props) => {
                 </View>
                     <View style={styles.container}>
                             <RoomItem/>
-                            {/*<LayoutTable {...props}/>*/}
-
                         <View>
                             <TouchableOpacity activeOpacity={0.7}
-                                              onPress={() => props.navigation.navigate('Reservation Table', 'Room 1')}
+                                              onPress={() => props.navigation.navigate('Таблица бронирования', 'Зал N')}
                                               style={styles.button}>
-                                <Text style={styles.textBtn}>Reserve a table</Text>
+                                <Text style={styles.textBtn}>Забронировать столик</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

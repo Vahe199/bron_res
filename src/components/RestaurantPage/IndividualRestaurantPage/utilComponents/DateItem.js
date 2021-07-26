@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Platform, Text, StyleSheet, Image} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import calendar from "../../../../assets/images/calendar.png"
+import calendar from "../../../../../assets/images/calendar.png"
 import {Divider} from "react-native-elements";
 import {TouchableOpacity} from "react-native-gesture-handler";
 
@@ -13,15 +13,15 @@ export const DateFilter = () => {
 
     const onChange = (event, selectedValue) => {
         setShow(Platform.OS === 'ios');
-       if(mode === 'datetime'){
-           console.log(selectedValue,mode,889)
-           setTime(selectedValue);
-           setDate(selectedValue);
-       } else if (mode == 'date') {
+        if(mode === 'datetime'){
+            console.log(selectedValue,mode,889)
+            setTime(selectedValue);
+            setDate(selectedValue);
+        } else if (mode == 'date') {
             const currentDate = selectedValue || new Date();
             setDate(currentDate);
             setMode('time');
-             setShow(Platform.OS !== 'ios'); // to show the picker again in time mode
+            setShow(Platform.OS !== 'ios'); // to show the picker again in time mode
         } else {
             const selectedTime = selectedValue || new Date();
             setTime(selectedTime);
@@ -56,7 +56,7 @@ export const DateFilter = () => {
             {show && (
                 <DateTimePicker
                     testID="dateTimePicker"
-                   // timeZoneOffsetInMinutes={0}
+                    // timeZoneOffsetInMinutes={0}
                     value={date}
                     mode={mode}
                     is24Hour={true}
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
     pickedDateContainer: {
         flexDirection:'row',
-       paddingVertical:12,
+        paddingVertical:12,
         paddingHorizontal:20,
         backgroundColor: '#FFFFFF',
         borderRadius: 7,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.29,
         shadowRadius: 4.65,
-        elevation: 7,
+        elevation: 3,
 
     },
     pickedDate: {
@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginRight:10
     },
-    // This only works on iOS
     datePicker: {
         width: 270,
         height: 160,

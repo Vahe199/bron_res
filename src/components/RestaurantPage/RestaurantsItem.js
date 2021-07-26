@@ -1,49 +1,48 @@
 import React from "react";
-import {StyleSheet, Text, View, Image, TouchableOpacity} from "react-native";
+import {StyleSheet, Text, View, Image, TouchableOpacity, FlatList} from "react-native";
 import { Divider} from 'react-native-elements'
-function RestItem({ el,navigation}) {
-
+import {useSelector} from "react-redux";
+function RestItem({restaurant,navigation}) {
 const individualRestHandler = (resName) => {
-    navigation.push('Individual Rest',resName)
+    navigation.push('Индивидуальный рест',resName)
 }
     return (
-        <TouchableOpacity activeOpacity={0.8}
-                          onPress={()=>individualRestHandler(el.name)}
-
-            // onLongPress={longPressHandler}
-        >
-                  <View style={styles.container}>
-
-                         <Image
-                             style={styles.image}
-                             resizeMode="cover"
-                             source={{ uri: el.logo }}
-                         />
-                      <Divider orientation="vertical" width={2} style={styles.divider} />
-                      <View style={styles.text}>
-                          <Text style={styles.name}>{el.name}</Text>
-                          <Text style={styles.address}>{el.address}</Text>
-                      </View>
-                      <Image style={styles.imageIcon}
-                          source={require('../../../assets/images/Arrow.jpg')}
-                      />
-                  </View>
-        </TouchableOpacity>
-
+        <View style={{flex:1}}>
+            <FlatList showsVerticalScrollIndicator={false}
+                      data={restaurant} keyExtractor={(item, index) => index.toString()}
+                      renderItem={({item}) => (
+                          <TouchableOpacity activeOpacity={0.7} style={styles.wrapper}
+                                            onPress={()=>individualRestHandler(item.name)}>
+                              <View style={styles.container}>
+                                  <Image
+                                      style={styles.image}
+                                      resizeMode="cover"
+                                      source={{ uri: item.logo }}
+                                  />
+                                  <Divider orientation="vertical" width={2} style={styles.divider} />
+                                  <View style={styles.textContainer}>
+                                      <Text style={styles.name}>{item.name}</Text>
+                                      <Text style={styles.address}>{item.address}</Text>
+                                  </View>
+                                  <Image style={styles.imageIcon}
+                                         source={require('../../../assets/images/Arrow.jpg')}
+                                  />
+                              </View>
+                          </TouchableOpacity>
+                      )}/>
+        </View>
     );
 }
 const styles= StyleSheet.create({
-    container:{
-        flex:1,
-        flexDirection:'row',
-        backgroundColor:'#fefefe',
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-        padding:10,
+    wrapper:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
         borderRadius:15,
         borderWidth:0,
-        marginTop:10,
-        width: '100%',
+        marginVertical:5,
+        marginHorizontal:1,
+        width: '99%',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -51,8 +50,19 @@ const styles= StyleSheet.create({
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
-
         elevation: 4,
+    },
+    container:{
+        flexDirection:'row',
+        backgroundColor:'#fefefe',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+        borderRadius:15,
+        borderWidth:0,
+         padding:10,
+        width: '100%',
+
+
     },
    name:{
       color:'#aa0a1e',
@@ -74,10 +84,9 @@ const styles= StyleSheet.create({
         marginLeft: 10,
         marginRight:10
     },
-    text:{
+    textContainer:{
         width:'60%',
         marginBottom:10
-    }
-
+    },
 })
 export default RestItem;

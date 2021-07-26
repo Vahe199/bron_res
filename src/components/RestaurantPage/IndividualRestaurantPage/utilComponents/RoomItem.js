@@ -10,24 +10,25 @@ import {
 } from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {TableItem} from "./TableItem";
+import Splash from "../../../Include/Splash";
 
 
 export const RoomItem = (props) => {
-const {room} = useSelector(state => state.individualPage);
-    const dispatch = useDispatch()
+const {room,loading} = useSelector(state => state.individualPage);
+
     const width = useWindowDimensions().width;
     const oneRenderItem = ({item}) => {
+        console.log(item,"item")
         return (
             <ScrollView   showsVerticalScrollIndicator={false}
                           showsHorizontalScrollIndicator={false}
                           contentContainerStyle={{paddingVertical:50}}>
       <View style={[styles.container,{width}]}>
           <ImageBackground resizeMode="stretch"
-              source={item.image} style={[styles.image,{width:width-30}]}>
-           <TableItem {...props} item={item}/>
+              source={{ uri:`http://restoran.fab.nu/assets/images-background-floor-plane/${item.background_img}`}} style={[styles.image,{width:width-30}]}>
+           {/*<TableItem {...props} item={item}/>*/}
           </ImageBackground>
-          <Text style={styles.title}>Room name, number</Text>
-          <Text style={styles.description}>description</Text>
+          <Text style={styles.title}>{item.hall_name}</Text>
           <Text style={styles.text} >{item.description}</Text>
       </View>
             </ScrollView>
@@ -40,6 +41,7 @@ const {room} = useSelector(state => state.individualPage);
         setCurrentIndex(viewableItems[0].index)
     }).current
     return (
+        loading ? <Splash/>:
         <View>
             <View style={styles.view}>
 
@@ -56,7 +58,7 @@ const {room} = useSelector(state => state.individualPage);
                           renderItem={oneRenderItem}
                 ref={slidesRef}/>
                 <View style={{flexDirection:'row',marginTop:5}}>
-                {room.map((item,i)=>
+                {room?.map((item,i)=>
                     <View style={i==currentIndex?styles.room:styles.rooms} key={i}/>
                 )}
                 </View>
@@ -102,22 +104,13 @@ const styles = StyleSheet.create({
     },
     title:{
         fontWeight:'800',
-        fontSize:28,
+        fontSize:24,
         marginBottom:10,
         color: '#000',
-        //textAlign:'center'
-    },
-    description:{
-        fontSize: 16,
-        fontWeight: "700",
-        color:'#000',
-        marginRight:240
-
     },
     text: {
         fontWeight:'300',
         color:'#62656b',
-        //  textAlign: 'center',
         paddingHorizontal: 20,
     },
     tableRows:{

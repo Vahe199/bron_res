@@ -6,17 +6,14 @@ const  FETCH_HOMEPAGE_DATA_ERROR = 'FETCH_HOMEPAGE_DATA_ERROR';
 
 let initialState = {
      category: [
-        {id:1,name:'Pizza'},
-        {id:2,name:'Shawurma'},
-        {id:3,name:'Desserts'},
-        {id:4,name:'Sushi'},
-        {id:5,name:'Burgers'},
-         {id:6,name:'Pizza'},
-         {id:7,name:'Sushi'},
-         {id:8,name:'Desserts'}
+        {id:1,name:'Пицца'},
+        {id:2,name:'Шаурма'},
+        {id:3,name:'Десерты'},
+        {id:4,name:'Бургеры'},
+        {id:5,name:'Суши'},
     ],
-    cities:['Moscow', 'Sochi', 'Saint Peterburg', 'Novosibirsk',
-        'Voronezh', 'Belgorod', 'Kursk', 'Omsk', 'Tver'
+    cities:['Москва', 'Сочи', 'Санкт Петербург', 'Новосибирск',
+        'Воронеж', 'Белгород', 'Курск', 'Омск', 'Тверь'
     ],
     topRest:[
         {
@@ -49,6 +46,56 @@ let initialState = {
             address: '8 Tsitsernakaberd Hwy',
             logo: 'https://www.wedding.am/sites/default/files/styles/business_logo/public/business/logo/el%20garden.jpg?itok=DjBNo69a'
         }
+    ],
+     rest: [
+        {
+            id: 1,
+            name: 'Tashir Pizza',
+            address: '63 Komitas Ave ·',
+            logo: 'http://www.tashirpizza.am/skin/frontend/tashir/default/images/logo.png'
+        },
+        {
+            id: 2,
+            name: 'Lavash restaurant',
+            address: '21 Tumanyan St',
+            logo: 'https://www.virtlo.com/uploads/places/39/39/kubbf516asghqsry1imfysnid.png'
+        },
+        {
+            id: 3,
+            name: 'Sherep Restaurant',
+            address: '1 Amiryan St',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyqeZfNhiO7FrjckHGaLEJ4y4QPI89aKV3CA&usqp=CAU'
+        },
+        {
+            id: 4,
+            name: 'Karas Food Chain',
+            address: ' 1 Hrachya Kochar St',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEFzz96bGDrebsGKGCzOV3DCWa9exFDzhGGw&usqp=CAU'
+        },
+        {
+            id: 5,
+            name: 'Karas Food Chain',
+            address: ' 1 Hrachya Kochar St',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEFzz96bGDrebsGKGCzOV3DCWa9exFDzhGGw&usqp=CAU'
+        },
+        {
+            id: 6,
+            name: ' EL Garden',
+            address: '8 Tsitsernakaberd Hwy',
+            logo: 'https://www.wedding.am/sites/default/files/styles/business_logo/public/business/logo/el%20garden.jpg?itok=DjBNo69a'
+        },
+        {
+            id: 7,
+            name: 'Sherep Restaurant',
+            address: '1 Amiryan St',
+            logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyqeZfNhiO7FrjckHGaLEJ4y4QPI89aKV3CA&usqp=CAU'
+        },
+        {
+            id: 8,
+            name: 'Lavash restaurant',
+            address: '21 Tumanyan St',
+            logo: 'https://www.virtlo.com/uploads/places/39/39/kubbf516asghqsry1imfysnid.png'
+        },
     ],
     error:null,
     loading:false

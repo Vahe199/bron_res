@@ -8,22 +8,23 @@ const Filter = (props) => {
     const dispatch = useDispatch()
 const {category} = useSelector(state => state.topPage)
     const getCategoryHandler = async (category) => {
-        if(props.route.name === "Category"){
+        if(props.route.name === "Категория"){
            await dispatch(getRestaurantsData(category))
         }else {
              await dispatch(getRestaurantsData(category))
-            props.navigation.push('Category')
+            props.navigation.push('Категория')
         }
     }
 
     return(
     <View>
-        <Text style={styles.text}>Filter</Text>
+        <Text style={styles.text}>Фильтр</Text>
         <View style={styles.view}>
 
             <FlatList horizontal
-                      pagingEnabled={true}
+                      bounces={false}
                       showsHorizontalScrollIndicator={false}
+                      viewabilityConfig={{viewAreaCoveragePercentThreshold: 50}}
                       legacyImplementation={false}
                       data={category}
                       keyExtractor={(item,index) => index.toString()}
@@ -41,8 +42,6 @@ const {category} = useSelector(state => state.topPage)
 const styles = StyleSheet.create({
     view:{
         flexDirection:'row',
-      // width: 340,
-
     },
     FilterBtn:{
         marginRight:10,
@@ -73,7 +72,6 @@ const styles = StyleSheet.create({
     text:{
         fontSize:20,
         fontWeight: "600",
-        marginBottom:10
     }
 })
 export default Filter

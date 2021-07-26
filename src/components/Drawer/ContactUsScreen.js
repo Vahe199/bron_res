@@ -7,21 +7,21 @@ function ContactUsScreen(props) {
             <View style={styles.container}>
                 <View>
                     <View style={styles.block}>
-                        <Text style={styles.textTitle}>Phone</Text>
+                        <Text style={styles.textTitle}>Номер телефона</Text>
                         <Text style={styles.text}>+7(123) 4567890</Text>
                     </View>
 
                     <View style={styles.block}>
-                        <Text style={styles.textTitle}>Email</Text>
+                        <Text style={styles.textTitle}>Эл. почта</Text>
                         <Text style={styles.text}>something@gmail.com</Text>
                     </View>
                     <View style={styles.block}>
-                        <Text style={styles.textTitle}>Address</Text>
+                        <Text style={styles.textTitle}>Адрес</Text>
                         <Text style={styles.text}>something address</Text>
                     </View>
                 </View>
                 <TouchableOpacity onPress={() => Linking.openURL('https://web-ex.tech/')} style={styles.footer}>
-                    <Text style={styles.footerText}>Made by Webex Technologies</Text>
+                    <Text style={styles.footerText}>Сделано Webex Technologies</Text>
                 </TouchableOpacity>
             </View>
         </ImageBackground>

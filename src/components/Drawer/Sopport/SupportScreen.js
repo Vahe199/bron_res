@@ -9,23 +9,23 @@ const SupportScreen = (props) => {
                     <Image source={require('../../../../assets/images/support.png')} style={styles.img}/>
                 </View>
                 <View style={[styles.text,{ marginBottom:10}]}>
-                    <Text style={{fontSize: 22,color:'#de3332',fontWeight:'700'}}>Need some help ?</Text>
+                    <Text style={{fontSize: 22,color:'#de3332',fontWeight:'700'}}>Нужна помощь ?</Text>
                 </View>
                     <TouchableOpacity activeOpacity={0.5}
                                        onPress={() => console.log('Call us')}
                                       style={[styles.button,styles.btnCall]}>
-                        <Text style={styles.textBtn}>Call us</Text>
+                        <Text style={styles.textBtn}>Позвоните нам</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity activeOpacity={0.5}
-                                      onPress={() => props.navigation.push('Message')}
+                                      onPress={() => props.navigation.push('Сообщение')}
                                       style={[styles.button,styles.btnMsg]}>
-                        <Text style={[styles.textBtn,{color: '#fe921f'}]}>Send message</Text>
+                        <Text style={[styles.textBtn,{color: '#fe921f'}]}>Отправить сообщение</Text>
                     </TouchableOpacity>
 
 
                     <TouchableOpacity activeOpacity={0.5} style={styles.foot}>
-                        <Text style={{fontSize: 18}}>Privacy Policy</Text>
+                        <Text style={{fontSize: 14}}>Политика Конфиденциальности</Text>
                         <AntDesign name="arrowright" size={16} color="black" />
                     </TouchableOpacity>
 
@@ -81,10 +81,11 @@ const styles = StyleSheet.create({
     },
 
     textBtn: {
-        fontSize: 22,
-        lineHeight: 25,
+        fontSize: 18,
+        lineHeight: 19,
         fontWeight: "600",
         color: '#fff',
+        textAlign:'center'
     },
     foot:{
         flexDirection: 'row',

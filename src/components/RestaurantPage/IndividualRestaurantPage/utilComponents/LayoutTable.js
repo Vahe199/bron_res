@@ -1,15 +1,15 @@
 import React from "react";
 import {ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {Table,Cell,TableWrapper} from "@deb-95/react-native-table-component";
-import A3 from "../../../../assets/images/table/a3.png";
-import A4 from "../../../../assets/images/table/a4.png";
-import A6 from "../../../../assets/images/table/a6.png";
-import A8 from "../../../../assets/images/table/a8.png";
-import P3 from "../../../../assets/images/table/p3.png"
-import P4 from "../../../../assets/images/table/p4.png"
-import P6 from "../../../../assets/images/table/p6.png"
-import P8 from "../../../../assets/images/table/p8.png"
-import trans from "../../../../assets/images/table/transparent.png"
+import A3 from "../../../../../assets/images/table/a3.png";
+import A4 from "../../../../../assets/images/table/a4.png";
+import A6 from "../../../../../assets/images/table/a6.png";
+import A8 from "../../../../../assets/images/table/a8.png";
+import P3 from "../../../../../assets/images/table/p3.png"
+import P4 from "../../../../../assets/images/table/p4.png"
+import P6 from "../../../../../assets/images/table/p6.png"
+import P8 from "../../../../../assets/images/table/p8.png"
+import trans from "../../../../../assets/images/table/transparent.png"
 import {Image} from "react-native-elements";
 export const LayoutTable = (props) => {
     const [isBusyTable , setIsBusyTable] = React.useState(false)
@@ -48,7 +48,7 @@ export const LayoutTable = (props) => {
     };
     return(  <View style={styles.container}>
         <ImageBackground resizeMode="stretch"
-                         source={require('../../../../assets/images/table/maket.jpg')} style={styles.image}>
+                         source={require('../../../../../assets/images/table/maket.jpg')} style={styles.image}>
         <Table style={styles.tableStyle}>
             {
                 table.tableData.map((rowData, index) => (

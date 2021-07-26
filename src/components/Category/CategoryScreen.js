@@ -13,7 +13,7 @@ const CategoryScreen = (props) => {
 
         <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={styles.root}>
             <View style={{zIndex:1}}>
-                <Header title={title + ' ' + 'Bar'}{...props}/>
+                <Header title={title + ' ' + 'бары'}{...props}/>
             </View>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
             <View style={styles.container} >

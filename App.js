@@ -6,12 +6,14 @@ import DrawerContent from "./src/navigation/DrawerContent";
 import StackContent from "./src/navigation/StackContent";
 import {Provider} from "react-redux";
 import {store} from "./src/redux/store";
+import {LogBox} from "react-native";
 
 
 const Drawer = createDrawerNavigator()
 export default function App() {
   const [isLoading, setIsLoading] = React.useState(true)
   React.useEffect(() => {
+    LogBox.ignoreLogs(['Remote debugger']);
     setTimeout(() => {
       setIsLoading(false)
     }, 1000)

@@ -6,7 +6,7 @@ import arrowBack from "../../../assets/images/Back.png"
 import phone from "../../../assets/images/phoneIcon.png"
 import {SearchQuery} from "./SearchQuery";
 export const Header = (props) => {
-    console.log(props,556565)
+    // console.log(props,"props")
     const [searchQuery, setSearchQuery] = React.useState('');
     const [searchShow, setSearchShow] = React.useState(false);
     const [filterData, setFilterData] = React.useState([]);
@@ -63,14 +63,16 @@ export const Header = (props) => {
                         : <MaterialIcons name='menu' size={35} onPress={() => props.navigation.openDrawer()}
                                          style={styles.icon}/>}
                     {searchShow ? <TextInput style={styles.search}
-                                             placeholder="Search"
+                                             placeholder="Поиск"
+                                             placeholderTextColor={'#fff'}
                                              onChangeText={searchFilter}
                                              value={searchQuery}
                     /> : <Text style={styles.headerText}>{props.title ? props.title : props.scene.route.name}</Text>}
-                    {props.title === "Room 1"? <TouchableOpacity onPress={() =>dialCall(+37499069020)}>
+                    {props.route && props.route.name === "Таблица бронирования"? <TouchableOpacity onPress={() =>dialCall(+37499069020)}>
                         <Image source={phone} style={{width: 27, height: 27}}/>
                         </TouchableOpacity>:
-                    <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>}
+                    <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>
+                    }
                 </View>
             </LinearGradient>
             {searchShow && <View style={styles.searchQuery}>
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
     search: {
         width: '70%',
         height: 60,
-        fontSize: 22,
+        fontSize: 20,
         color: '#fff',
         paddingHorizontal: 20,
         backgroundColor: '#f8a21d2b',

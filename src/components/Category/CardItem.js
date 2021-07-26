@@ -3,12 +3,11 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from "react-native";
 import {Card} from 'react-native-elements'
 function CardItem({ el,navigation}) {
     const longPressHandler = () => {
-        navigation.push('Individual Rest',el.name)
+        navigation.push('Индивидуальный рест',el.name)
     }
     return (
         <TouchableOpacity activeOpacity={0.9}
                          onPress={longPressHandler}
-                          style={{backgroundColor:'#FFF'}}
            // onLongPress={longPressHandler}
         >
             <Card containerStyle={styles.card} >

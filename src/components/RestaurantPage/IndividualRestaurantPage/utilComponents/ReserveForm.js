@@ -1,22 +1,34 @@
 import React from "react";
-import {StyleSheet, Text, TextInput, Animated, TouchableOpacity, View, Pressable} from "react-native";
+import {
+    StyleSheet,
+    Text,
+    TextInput,
+    Animated,
+    TouchableOpacity,
+    View,
+    Dimensions,
+    Image,
+    Pressable
+} from "react-native";
 import {Formik} from 'formik';
 import * as Yup from "yup";
+import close from "../../../../../assets/images/close.png"
 
 const phoneRegExp = /^(\+\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
-        .required('Required field'),
+        .required('Обязательное поле'),
     phone: Yup.string()
-        .matches(phoneRegExp, 'Phone number is not valid')
-        .min(12, 'Phone number is not valid')
-        .max(18, 'Phone number is not valid')
-        .required('Required field'),
+        .matches(phoneRegExp, 'Номер телефона недействителен')
+        .min(12, 'Номер телефона недействителен')
+        .max(18, 'Номер телефона недействителен')
+        .required('Обязательное поле'),
 });
 export const ReserveForm = ({navigation}) => {
+    const width = Dimensions.get('window').width;
     const [animatedTime, setAnimatedTime] = React.useState(true)
     const sendFormData = (values) => {
-        //navigation.push('Confirmation')
+        navigation.push('Подтверждение')
         setAnimatedTime(true)
         Animated.sequence([
             Animated.timing(opacity,{
@@ -30,11 +42,7 @@ export const ReserveForm = ({navigation}) => {
                 duration:200,
                 useNativeDriver:true
             })
-        ]).start((done) => {
-            if (done.finished) {
-                console.log(done,77446)
-            }
-        })
+        ]).start()
     }
     const opacity = React.useRef(new Animated.Value(0)).current;
     return (
@@ -49,15 +57,16 @@ export const ReserveForm = ({navigation}) => {
                     }
                     ],
                 }]}>
-                    <Text onPress={() => setAnimatedTime(false)} style={styles.close}>X</Text>
-                    <Text style={{color: '#c50000', fontSize: 20}}>Reservation rejected !</Text>
-                    <Text style={{textAlign: 'center'}}>Your reservation wos rejected because of that the table already
-                        is reserved for that time </Text>
-                    <Text style={{fontWeight: '700'}}>Available times: 14:00 , 17:00, 20:00</Text>
+                    <Pressable onPress={() => setAnimatedTime(false)} style={styles.close}>
+                        <Image source={close} style={{width:15, height:15}}/>
+                    </Pressable>
+                    <Text style={{color: '#c50000', fontSize: 20}}>Бронирование отклонено!</Text>
+                    <Text style={{textAlign: 'center'}}>Ваше бронирование было отклонено, поскольку столик уже забронирован на это время </Text>
+                    <Text style={{fontWeight: '700'}}>Доступное время: 14:00, 17:00, 20:00</Text>
                 </Animated.View>}
                 <Formik
                     initialValues={{name: '', phone: ''}}
-                    // validationSchema={SignupSchema}
+                     validationSchema={SignupSchema}
                     onSubmit={(values, action) => {
                         sendFormData(values)
                         action.resetForm();
@@ -65,16 +74,16 @@ export const ReserveForm = ({navigation}) => {
                 >
                     {(props) => (
                         <View>
-                            <Text style={styles.label}>Reservoir Name</Text>
-                            <TextInput style={styles.input}
+                            <Text style={styles.label}>Имя</Text>
+                            <TextInput style={[styles.input,{width:width-35}]}
                                        value={props.values.name}
                                        onChangeText={props.handleChange('name')}
                             />
                             {props.errors.name && props.touched.name ? (
                                 <Text style={[styles.warning,{ bottom:225,}]}>{props.errors.name}</Text>
                             ) : null}
-                            <Text style={styles.label}>Phone number</Text>
-                            <TextInput style={styles.input}
+                            <Text style={styles.label}>Номер телефона</Text>
+                            <TextInput style={[styles.input,{width:width-35}]}
                                        value={props.values.phone}
                                         textContentType='telephoneNumber'
                                         dataDetectorTypes='phoneNumber'
@@ -87,8 +96,8 @@ export const ReserveForm = ({navigation}) => {
                             ) : null}
                             <TouchableOpacity activeOpacity={0.5}
                                               onPress={props.handleSubmit}
-                                              style={styles.button}>
-                                <Text style={styles.textBtn}>Reserve a table</Text>
+                                              style={[styles.button,{width:width-35}]}>
+                                <Text style={styles.textBtn}>Забронировать столик</Text>
                             </TouchableOpacity>
                         </View>
                     )}
@@ -123,16 +132,12 @@ const styles = StyleSheet.create({
         zIndex:99
     },
     close: {
-        width:30,
         borderWidth: 1,
         borderColor: '#EEE',
-        fontSize: 24,
-        color: '#646464',
-        textAlign: 'center',
-        padding:2,
-        marginLeft: "90%",
+        padding:5,
+        marginLeft: "96%",
         borderRadius:15,
-        marginVertical:-15
+        marginVertical:-10
     },
     input: {
         borderWidth:2,
@@ -140,13 +145,11 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         borderColor:'#e5e5e5',
         fontSize: 24,
-        width: 330,
         height: 50,
         backgroundColor: '#fff',
         paddingHorizontal: 20
     },
     button: {
-        width: 330,
         height: 50,
         marginVertical: 10,
         alignItems: 'center',
@@ -176,6 +179,7 @@ const styles = StyleSheet.create({
         right:15,
         color: '#f44336',
         textAlign:'right',
+        fontSize:11
     },
     label:{
       marginLeft:15

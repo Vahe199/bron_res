@@ -1,22 +1,21 @@
 import React from "react";
 import {
     ImageBackground,
-    Pressable,
     SafeAreaView,
     ScrollView,
     StyleSheet,
     Text, TouchableOpacity,
     View
 } from "react-native";
-import {RoomItem} from "./RoomItem";
-import {ReserveForm} from "./ReserveForm";
+import {ReserveForm} from "./utilComponents/ReserveForm";
 import {Header} from "../../Include/Header";
-import {LayoutTable} from "./LayoutTable";
-import {DateFilter} from "./DateItemed";
+import {LayoutTable} from "./utilComponents/LayoutTable";
+import {DateFilter} from "./utilComponents/DateItem";
+
 
 export const TableReservationPage = (props) => {
-    let tableNumber = props.route.params ? Number(props.route.params.split(' ')[1]): 6;
-    const [count, setCount] = React.useState(tableNumber)
+    console.log(props.route.params)
+    const [count, setCount] = React.useState(4)
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
             <View>
@@ -29,11 +28,11 @@ export const TableReservationPage = (props) => {
                     <LayoutTable {...props}/>
             </View>
             <View style={styles.resDate}>
-                <Text style={styles.text}>Date and time of reservation</Text>
+                <Text style={styles.text}>Дата и время бронирования</Text>
                    <DateFilter {...props}/>
             </View>
             <View style={styles.numGuest}>
-                <Text style={styles.text}>Number of Guests</Text>
+                <Text style={styles.text}>Количество гостей</Text>
                 <View style={{flexDirection: 'row', paddingVertical: 10}}>
                     <TouchableOpacity style={[styles.button, styles.btnLeft]} activeOpacity={0.7}
                                onPress={() => setCount(((count - 1 === 0 ? count : count - 1)))}>
@@ -80,11 +79,12 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 1,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+
+        elevation: 3,
     },
     btnRight:{
         borderTopRightRadius:10,
@@ -102,20 +102,22 @@ const styles = StyleSheet.create({
         letterSpacing: 0.25,
     },
     textInput:{
+        height:45,
         fontSize: 20,
         backgroundColor:'#f6f6f6',
-       marginHorizontal:2,
+       marginHorizontal:1,
          paddingVertical:9,
         paddingHorizontal:18,
        textAlign:'center',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 4,
+            height: 2,
         },
-        shadowOpacity: 0.32,
-        shadowRadius: 5.46,
-        elevation: 9,
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
 
     },
     resDate: {

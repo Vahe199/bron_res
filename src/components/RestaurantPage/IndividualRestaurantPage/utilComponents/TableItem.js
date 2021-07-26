@@ -10,11 +10,11 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {Cell, Rows, Table, TableWrapper} from "react-native-table-component";
 import {Image} from "react-native-elements";
-import P8 from "../../../../assets/images/table/p8.png";
-import P6 from "../../../../assets/images/table/p6.png";
-import P3 from "../../../../assets/images/table/p3.png";
-import P4 from "../../../../assets/images/table/p4.png";
-import trans from "../../../../assets/images/table/transparent.png";
+import P8 from "../../../../../assets/images/table/p8.png";
+import P6 from "../../../../../assets/images/table/p6.png";
+import P3 from "../../../../../assets/images/table/p3.png";
+import P4 from "../../../../../assets/images/table/p4.png";
+import trans from "../../../../../assets/images/table/transparent.png";
 export const TableItem = ({navigation,item}) => {
     const {width, height} = useWindowDimensions();
     const [isBusyTable , setIsBusyTable] = React.useState(false)

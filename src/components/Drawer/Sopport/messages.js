@@ -5,16 +5,16 @@ import * as Yup from "yup";
 
 const SignupSchema = Yup.object().shape({
     email: Yup.string()
-        .email('Invalid email')
-        .required('Required field'),
+        .email('Неверный адрес эл. почты')
+        .required('Обязательное поле'),
     subject: Yup.string()
-        .min(2, 'Too Short!')
-        .max(70, 'Too Long!')
-        .required('Required field'),
+        .min(2, 'Слишком короткий!')
+        .max(70, 'Слишком долго!')
+        .required('Обязательное поле'),
     message: Yup.string()
-        .min(2, 'Too Short!')
-        .max(200, 'Too Long!')
-        .required('Required field'),
+        .min(2, 'Слишком короткий!')
+        .max(200, 'Слишком долго!')
+        .required('Обязательное поле'),
 });
 export const Form = () => {
     return (
@@ -25,7 +25,6 @@ export const Form = () => {
                     initialValues={{email: '', subject: '', message: ''}}
                    validationSchema={SignupSchema}
                     onSubmit={(values, action) => {
-                       // console.log(values,5777888);
                         action.resetForm()
                     }}
                 >
@@ -40,19 +39,19 @@ export const Form = () => {
                             {errors.message && touched.message ? (
                                 <Text style={[styles.warning,{top:185}]}>{errors.message}</Text>
                             ) : null}
-                            <Text>Email</Text>
+                            <Text>Эл. почта</Text>
                             <TextInput style={styles.input}
                                        value={values.email}
                                        onBlur={handleBlur('email')}
                                        onChangeText={handleChange('email')}
                             />
 
-                            <Text>Subject</Text>
+                            <Text>Тема</Text>
                             <TextInput style={styles.input}
                                        value={values.subject}
                                        onBlur={handleBlur('subject')}
                                        onChangeText={handleChange('subject')}/>
-                            <Text>Message</Text>
+                            <Text>Сообщение</Text>
                             <TextInput multiline={true}
                                        style={styles.textArea}
                                        value={values.message}
@@ -61,7 +60,7 @@ export const Form = () => {
                             <TouchableOpacity activeOpacity={0.5}
                                               onPress={()=>{handleSubmit()}}
                                               style={styles.button}>
-                                <Text style={styles.textBtn}>Send</Text>
+                                <Text style={styles.textBtn}>Отправить</Text>
                             </TouchableOpacity>
                         </View>
                     )}

@@ -27,23 +27,23 @@ const StackContent = ({navigation,route}) => (
             height: 100
         }
     }}>
-        <Stack.Screen name={"Restaurants"} component={RestaurantsScreen}/>
-        <Stack.Screen name={"Individual Rest"} component={IndividualRestaurantPage}
+        <Stack.Screen name={"Рестораны"} component={RestaurantsScreen}/>
+        <Stack.Screen name={"Индивидуальный рест"} component={IndividualRestaurantPage}
                       options={{headerShown: false,
                           header: null}}/>
-        <Stack.Screen name={"Reservation Table"} component={TableReservationPage}
+        <Stack.Screen name={"Таблица бронирования"} component={TableReservationPage}
                       options={{headerShown: false}}/>
-        <Stack.Screen name={"Confirmation"} component={Confirmation}
+        <Stack.Screen name={"Подтверждение"} component={Confirmation}
                       options={{headerShown: false}}/>
-        <Stack.Screen name={'Support'} component={SupportScreen}/>
-        <Stack.Screen name={'Terms of use'} component={TermsOfUseScreen}/>
-        <Stack.Screen name={'Contact us'} component={ContactUsScreen}/>
-        <Stack.Screen name={'Message'} component={Form}/>
-        <Stack.Screen name={"About us"} component={AboutScreen}/>
-        <Stack.Screen name={"Near me"} component={NearMe}/>
-        <Stack.Screen name={"Category"} component={CategoryScreen}
+        <Stack.Screen name={"Рядом со мной"} component={NearMe}/>
+        <Stack.Screen name={"Категория"} component={CategoryScreen}
                       options={{headerShown: false}}/>
-        <Stack.Screen name={"Near Me"} component={MapsScreen} />
+        <Stack.Screen name={"Рядом Со мной"} component={MapsScreen} />
+        <Stack.Screen name={"О нас"}  options={{ title:'О нас' }} component={AboutScreen}/>
+        <Stack.Screen name={'Поддержка'} options={{ title: 'Поддержка' }} component={SupportScreen}/>
+        <Stack.Screen name={'Сообщение'} options={{ title: 'Сообщение' }} component={Form}/>
+        <Stack.Screen name={'Свяжитесь с нами'} options={{ title: 'Свяжитесь с нами' }} component={ContactUsScreen}/>
+        <Stack.Screen name={'Правила пользования'} options={{ title: 'Правила пользования' }} component={TermsOfUseScreen}/>
     </Stack.Navigator>
 )
 

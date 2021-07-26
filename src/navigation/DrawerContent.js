@@ -11,7 +11,7 @@ const DrawerContent = (props) => {
             colors={['#faab22', '#f16909']}
             style={styles.background}>
             <DrawerContentScrollView style={styles.container} {...props}>
-                    <TouchableOpacity  onPress={()=>props.navigation.navigate('Restaurants')} activeOpacity={0.8}>
+                    <TouchableOpacity  onPress={()=>props.navigation.navigate('Рестораны')} activeOpacity={0.8}>
                     <View style={styles.logoInfoSection}>
                             <Image
                                 style={styles.logo}
@@ -19,26 +19,26 @@ const DrawerContent = (props) => {
                             />
                     </View>
                     </TouchableOpacity>
-                    <DrawerItem label={'About'} style={styles.buttonDrawerItem}
+                    <DrawerItem label={'О нас'} style={styles.buttonDrawerItem}
                                 labelStyle={styles.label}
-                                onPress={()=>props.navigation.navigate('About us')}>
+                                onPress={()=>props.navigation.navigate('О нас')}>
 
                     </DrawerItem>
-                        <DrawerItem label={'Support'} style={styles.buttonDrawerItem}
+                        <DrawerItem label={'Поддержка'} style={styles.buttonDrawerItem}
                                     labelStyle={styles.label}
-                                    onPress={()=>props.navigation.navigate('Support')}>
+                                    onPress={()=>props.navigation.navigate('Поддержка')}>
 
                         </DrawerItem >
-                        <DrawerItem label={'Contact us'} style={styles.buttonDrawerItem}
+                        <DrawerItem label={'Свяжитесь с нами'} style={styles.buttonDrawerItem}
                                     labelStyle={[styles.label,{}]}
-                                    onPress={()=>props.navigation.navigate('Contact us')}>
+                                    onPress={()=>props.navigation.navigate('Свяжитесь с нами')}>
 
                         </DrawerItem>
 
             </DrawerContentScrollView>
-            <DrawerItem label={'Terms of use'} style={styles.buttonTerms}
+            <DrawerItem label={'Правила пользования'} style={styles.buttonTerms}
                         labelStyle={styles.label}
-                        onPress={()=>props.navigation.navigate('Terms of use')}>
+                        onPress={()=>props.navigation.navigate('Правила пользования')}>
 
             </DrawerItem>
         </LinearGradient>

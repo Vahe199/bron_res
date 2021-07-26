@@ -2,13 +2,14 @@ import * as React from 'react';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {StyleSheet, Text, View, Dimensions, Alert, TouchableOpacity, Image} from 'react-native';
 import * as Location from 'expo-location';
-import loaction1 from "../../../assets/images/loaction1.png";
-import locat from "../../../assets/images/location2.png";
-import locatio from "../../../assets/images/location3.png";
+import loaction1 from "../../../assets/images/locationIcon/loaction1.png";
+import locat from "../../../assets/images/locationIcon/location2.png";
+import locatio from "../../../assets/images/locationIcon/location3.png";
 import findMi from "../../../assets/images/findMe.png"
 import Splash from "../Include/Splash";
+import {ButtonList} from "./ButtonList/ButtonList";
 
-const MapsScreen = ({navigation}) => {
+const MapsScreen = (props) => {
     const [isLoading, setIsLoading] = React.useState(true)
     const coordinates = [
          {id:1,latitude:40.19473293458804,longitude:44.51945165511966, name:'test', category:'Sushi'},
@@ -80,14 +81,7 @@ const MapsScreen = ({navigation}) => {
                     coordinate={pin}/>
             </MapView>
             <View style={styles.view}>
-                <TouchableOpacity activeOpacity={0.5} style={[styles.button, styles.offline]}
-                                  onPress={()=>navigation.push('Near me')} >
-                    <Text style={styles.textBtn}>List</Text>
-                </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.5} disabled={true}
-                                  onPress={()=>navigation.push('Near Me')}  style={styles.button} >
-                    <Text style={styles.textBtn}>Map</Text>
-                </TouchableOpacity>
+              <ButtonList {...props}/>
             </View>
             <View style={styles.locationView}>
             <TouchableOpacity activeOpacity={0.5}
@@ -123,37 +117,9 @@ const styles = StyleSheet.create({
     view:{
         zIndex:1,
         position:'absolute',
-        flexDirection:'row',
-        marginLeft:20,
-        marginTop:20,
+        left:10,
+        top:10,
 
-    },
-    button:{
-        marginRight:10,
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 7,
-        paddingHorizontal: 20,
-        borderRadius: 7,
-        elevation: 3,
-        backgroundColor: '#fff',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-
-    },
-    offline: {
-        backgroundColor:'#e9e9e9'
-    },
-    textBtn: {
-        fontSize: 20,
-        lineHeight: 21,
-        fontWeight: "600",
-        color: '#000',
     },
     locationView:{
         zIndex:1,

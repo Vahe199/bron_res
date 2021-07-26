@@ -8,7 +8,7 @@ export const
     return (
 <View style={{flex:1}}>
     <View style={{zIndex:1}}>
-    <Header title='Confirmation'{...props}/>
+    <Header title='Подтверждение'{...props}/>
     </View>
     <ImageBackground source={require('../../../../assets/images/pageBackground.png')}
                      style={{flex:1, width:'100%',height:null}}>
@@ -17,15 +17,16 @@ export const
                 <Image source={require('../../../../assets/images/confirmation.png')} style={styles.img}/>
             </View>
             <View style={styles.text}>
-                <Text style={{fontSize: 20,color:'#de3332',fontWeight:'700',marginBottom:10}}>Reservation Confirmed !</Text>
-                <Text style={{color: '#808080',textAlign:'center'}}>
-                    Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. test t 6:32</Text>
+                <Text style={{fontSize: 18,color:'#de3332',fontWeight:'700',marginBottom:10}}>Бронирование подтверждено</Text>
+                <Text style={{color: '#808080',textAlign:'center',fontSize:15}}>
+                    Ваше бронрование в Ресторане Шереп на Пятницу, 28 Мая в 18:45 для 5 гостей подтверждено!
+                </Text>
 
             </View>
             <TouchableOpacity activeOpacity={0.5}
-                 onPress={() => props.navigation.push('Restaurants')}
+                 onPress={() => props.navigation.push('Рестораны')}
                               style={[styles.button,styles.btnCall]}>
-                <Text style={styles.textBtn}>Close</Text>
+                <Text style={styles.textBtn}>Закрывать</Text>
             </TouchableOpacity>
 
             <TouchableOpacity activeOpacity={0.5}
