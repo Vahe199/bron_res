@@ -19,6 +19,11 @@ const DrawerContent = (props) => {
                             />
                     </View>
                     </TouchableOpacity>
+                <DrawerItem label={'Главная страница'} style={styles.buttonDrawerItem}
+                            labelStyle={styles.label}
+                            onPress={()=>props.navigation.navigate('Рестораны')}>
+
+                </DrawerItem>
                     <DrawerItem label={'О нас'} style={styles.buttonDrawerItem}
                                 labelStyle={styles.label}
                                 onPress={()=>props.navigation.navigate('О нас')}>

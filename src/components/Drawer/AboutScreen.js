@@ -1,7 +1,8 @@
 import React from "react";
 import {StyleSheet, ImageBackground, Text, View, ScrollView} from "react-native";
 
-function AboutScreen({ navigation }) {
+function AboutScreen(props) {
+    console.log(props,"header")
     return (
         <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={styles.background}>
             <ScrollView>

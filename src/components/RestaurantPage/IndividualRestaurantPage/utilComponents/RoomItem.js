@@ -15,17 +15,17 @@ import Splash from "../../../Include/Splash";
 
 export const RoomItem = (props) => {
 const {room,loading} = useSelector(state => state.individualPage);
-
     const width = useWindowDimensions().width;
     const oneRenderItem = ({item}) => {
-        console.log(item,"item")
+
         return (
             <ScrollView   showsVerticalScrollIndicator={false}
                           showsHorizontalScrollIndicator={false}
                           contentContainerStyle={{paddingVertical:50}}>
       <View style={[styles.container,{width}]}>
           <ImageBackground resizeMode="stretch"
-              source={{ uri:`http://restoran.fab.nu/assets/images-background-floor-plane/${item.background_img}`}} style={[styles.image,{width:width-30}]}>
+              source={{ uri:`http://restoran.fab.nu/assets/images-background-floor-plane/${item.background_img}`}}
+                           style={[styles.image,{width:width-30}]}>
            {/*<TableItem {...props} item={item}/>*/}
           </ImageBackground>
           <Text style={styles.title}>{item.hall_name}</Text>

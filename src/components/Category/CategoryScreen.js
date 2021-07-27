@@ -12,9 +12,6 @@ const CategoryScreen = (props) => {
     return(
 
         <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={styles.root}>
-            <View style={{zIndex:1}}>
-                <Header title={title + ' ' + 'бары'}{...props}/>
-            </View>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
             <View style={styles.container} >
                 <View style={styles.filter}>

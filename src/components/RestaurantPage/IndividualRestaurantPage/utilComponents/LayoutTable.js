@@ -26,7 +26,7 @@ export const LayoutTable = (props) => {
     // let imgSrc = data==='8'?table.img[4]:data==='6'?table.img[2]:data==='3'?table.img[5]:data==='4'?table.img[3]:table.img[6]
     // source={require(`../../../../assets/images/table/${imgSrc}`)}
     const choseTable = (data) => {
-            props.navigation.push('Reservation Table',`Table ${data}`);
+            props.navigation.push('Таблица бронирования',`Стол  ${data}`);
             if(isBusyTable) {
                 setIsBusyTable(false)
             }else {

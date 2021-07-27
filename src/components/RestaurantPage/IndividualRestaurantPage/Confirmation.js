@@ -7,11 +7,7 @@ export const
 
     return (
 <View style={{flex:1}}>
-    <View style={{zIndex:1}}>
-    <Header title='Подтверждение'{...props}/>
-    </View>
-    <ImageBackground source={require('../../../../assets/images/pageBackground.png')}
-                     style={{flex:1, width:'100%',height:null}}>
+    <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex:1}}>
         <View style={styles.container}>
             <View>
                 <Image source={require('../../../../assets/images/confirmation.png')} style={styles.img}/>

@@ -17,8 +17,7 @@ import {IndividualRestaurantPage} from "../components/RestaurantPage/IndividualR
 import TermsOfUseScreen from "../components/Drawer/TermsOfUseScreen";
 const Stack = createStackNavigator();
 
-
-const StackContent = ({navigation,route}) => (
+const StackContent = (props) => (
     <Stack.Navigator headerMode="screen" screenOptions={{
 
         header:(props)=><Header {...props}/>,
@@ -29,21 +28,24 @@ const StackContent = ({navigation,route}) => (
     }}>
         <Stack.Screen name={"Рестораны"} component={RestaurantsScreen}/>
         <Stack.Screen name={"Индивидуальный рест"} component={IndividualRestaurantPage}
-                      options={{headerShown: false,
-                          header: null}}/>
-        <Stack.Screen name={"Таблица бронирования"} component={TableReservationPage}
-                      options={{headerShown: false}}/>
+                      options={{  arrowBack:true,call:true}}/>
+        <Stack.Screen name={"Таблица бронирования"}  options={{  arrowBack:true, call:true}}
+                      component={TableReservationPage}/>
         <Stack.Screen name={"Подтверждение"} component={Confirmation}
-                      options={{headerShown: false}}/>
+                      options={{ arrowBack:true}}/>
         <Stack.Screen name={"Рядом со мной"} component={NearMe}/>
-        <Stack.Screen name={"Категория"} component={CategoryScreen}
-                      options={{headerShown: false}}/>
+        <Stack.Screen name={"Категория"} component={CategoryScreen}/>
         <Stack.Screen name={"Рядом Со мной"} component={MapsScreen} />
-        <Stack.Screen name={"О нас"}  options={{ title:'О нас' }} component={AboutScreen}/>
-        <Stack.Screen name={'Поддержка'} options={{ title: 'Поддержка' }} component={SupportScreen}/>
-        <Stack.Screen name={'Сообщение'} options={{ title: 'Сообщение' }} component={Form}/>
-        <Stack.Screen name={'Свяжитесь с нами'} options={{ title: 'Свяжитесь с нами' }} component={ContactUsScreen}/>
-        <Stack.Screen name={'Правила пользования'} options={{ title: 'Правила пользования' }} component={TermsOfUseScreen}/>
+        <Stack.Screen name={"О нас"}
+                      options={{arrowBack:true}} component={AboutScreen}/>
+        <Stack.Screen name={'Поддержка'}
+                      options={{arrowBack:true}} component={SupportScreen}/>
+        <Stack.Screen name={'Сообщение'}
+                      options={{arrowBack:true}} component={Form}/>
+        <Stack.Screen name={'Свяжитесь с нами'}
+                      options={{arrowBack:true}} component={ContactUsScreen}/>
+        <Stack.Screen name={'Правила пользования'}
+                      options={{arrowBack:true}} component={TermsOfUseScreen}/>
     </Stack.Navigator>
 )
 

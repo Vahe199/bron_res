@@ -8,19 +8,14 @@ import {
     View
 } from "react-native";
 import {ReserveForm} from "./utilComponents/ReserveForm";
-import {Header} from "../../Include/Header";
 import {LayoutTable} from "./utilComponents/LayoutTable";
 import {DateFilter} from "./utilComponents/DateItem";
 
 
 export const TableReservationPage = (props) => {
-    console.log(props.route.params)
     const [count, setCount] = React.useState(4)
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
-            <View>
-                <Header title={props.route.params }{...props}/>
-            </View>
         <SafeAreaView style={{flex: 1}}>
             <ScrollView contentContainerStyle={{paddingVertical: 1}}>
         <View style={styles.container}>

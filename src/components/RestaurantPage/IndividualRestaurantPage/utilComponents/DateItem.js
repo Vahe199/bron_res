@@ -35,7 +35,6 @@ export const DateFilter = () => {
     };
 
     const showDatepicker = () => {
-        console.log(Platform)
         if(Platform.OS == "android"){
             showMode('date');
             console.log(Platform)

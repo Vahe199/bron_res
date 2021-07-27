@@ -2,10 +2,9 @@ import React, {useRef, useState} from "react";
 import {
     StyleSheet,
     Text,
-
     View,
     useWindowDimensions,
-    ScrollView, ImageBackground, TouchableOpacity
+    TouchableOpacity
 } from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {Cell, Rows, Table, TableWrapper} from "react-native-table-component";

@@ -5,7 +5,7 @@ const Splash = ({navigation}) => {
 
     return(
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Loading ...</Text>
+            <Text>Загрузка ...</Text>
             <ActivityIndicator size="small" color="#FAB023" />
         </View>
     )

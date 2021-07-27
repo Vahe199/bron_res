@@ -5,7 +5,6 @@ import {
     Text, TouchableOpacity,
     View
 } from "react-native";
-import {Header} from "../../Include/Header";
 import {RoomItem} from "./utilComponents/RoomItem";
 import {getIndividualRestaurantsData} from "../../../redux/action/individualrestaurant-action";
 import {useDispatch} from "react-redux";
@@ -18,9 +17,6 @@ export const IndividualRestaurantPage = (props) => {
     },[])
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
-                <View>
-                    <Header title={props.route.params}{...props}/>
-                </View>
                     <View style={styles.container}>
                             <RoomItem/>
                         <View>

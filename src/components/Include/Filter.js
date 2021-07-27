@@ -4,15 +4,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {getRestaurantsData} from "../../redux/action/restaurant-action";
 
 const Filter = (props) => {
-
     const dispatch = useDispatch()
 const {category} = useSelector(state => state.topPage)
     const getCategoryHandler = async (category) => {
         if(props.route.name === "Категория"){
            await dispatch(getRestaurantsData(category))
+            props.navigation.push('Категория',category+ ' ' + 'бары')
         }else {
              await dispatch(getRestaurantsData(category))
-            props.navigation.push('Категория')
+            props.navigation.push('Категория',category+ ' ' + 'бары')
         }
     }
 

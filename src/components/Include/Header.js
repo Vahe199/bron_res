@@ -2,11 +2,13 @@ import React from "react";
 import {Image, Linking, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
 import {LinearGradient} from "expo-linear-gradient";
-import arrowBack from "../../../assets/images/Back.png"
-import phone from "../../../assets/images/phoneIcon.png"
+import arrowBack from "../../../assets/images/Back.png";
+import phone from "../../../assets/images/phoneIcon.png";
+import transparent from "../../../assets/images/table/transparent.png"
 import {SearchQuery} from "./SearchQuery";
+
+
 export const Header = (props) => {
-    // console.log(props,"props")
     const [searchQuery, setSearchQuery] = React.useState('');
     const [searchShow, setSearchShow] = React.useState(false);
     const [filterData, setFilterData] = React.useState([]);
@@ -57,7 +59,7 @@ export const Header = (props) => {
                 end={{x: 1.2, y: 0}}
                 style={styles.background}>
                 <View style={styles.header}>
-                    {props.route && props.route.name === "Reservation Table" ? <TouchableOpacity onPress={() => props.navigation.goBack()} activeOpacity={0.5}>
+                    {props.scene?.descriptor.options.arrowBack ? <TouchableOpacity onPress={() => props.navigation.goBack()} activeOpacity={0.5}>
                             <Image source={arrowBack} style={styles.iconImg}/>
                         </TouchableOpacity>
                         : <MaterialIcons name='menu' size={35} onPress={() => props.navigation.openDrawer()}
@@ -67,11 +69,12 @@ export const Header = (props) => {
                                              placeholderTextColor={'#fff'}
                                              onChangeText={searchFilter}
                                              value={searchQuery}
-                    /> : <Text style={styles.headerText}>{props.title ? props.title : props.scene.route.name}</Text>}
-                    {props.route && props.route.name === "Таблица бронирования"? <TouchableOpacity onPress={() =>dialCall(+37499069020)}>
+                    /> : <Text style={styles.headerText}>{props.scene?.route.params?props.scene?.route.params : props.scene?.route.name}</Text>}
+                    {props.scene?.descriptor.options.call ? <TouchableOpacity onPress={() =>dialCall(+37499069020)}>
                         <Image source={phone} style={{width: 27, height: 27}}/>
-                        </TouchableOpacity>:
-                    <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>
+                        </TouchableOpacity>
+                        :props.scene?.descriptor.options.arrowBack ?  <Image source={transparent} style={{width: 27, height: 27}}/>
+                   : <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>
                     }
                 </View>
             </LinearGradient>
