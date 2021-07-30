@@ -6,15 +6,9 @@ import {
     View
 } from "react-native";
 import {RoomItem} from "./utilComponents/RoomItem";
-import {getIndividualRestaurantsData} from "../../../redux/action/individualrestaurant-action";
-import {useDispatch} from "react-redux";
-
 
 export const IndividualRestaurantPage = (props) => {
-    const dispatch = useDispatch()
-    React.useEffect (()=>{
-         dispatch(getIndividualRestaurantsData(props.route.params))
-    },[])
+
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
                     <View style={styles.container}>

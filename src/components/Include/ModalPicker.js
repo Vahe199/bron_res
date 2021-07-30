@@ -18,8 +18,8 @@ export const ModalPicker = (props) => {
                             <View style={styles.city}
                                   key={i}>
                                 <TouchableOpacity
-                                                  onPress={() => onPressItem(city)}>
-                                    <Text style={styles.text}>{city}</Text>
+                                                  onPress={() => onPressItem(city.name)}>
+                                    <Text style={styles.text}>{city.name}</Text>
                                 </TouchableOpacity>
                             </View>
                         )

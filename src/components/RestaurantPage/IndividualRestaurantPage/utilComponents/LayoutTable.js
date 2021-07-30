@@ -10,42 +10,53 @@ import P4 from "../../../../../assets/images/table/p4.png"
 import P6 from "../../../../../assets/images/table/p6.png"
 import P8 from "../../../../../assets/images/table/p8.png"
 import trans from "../../../../../assets/images/table/transparent.png"
+import tab from "../../../../../assets/table.png"
 import {Image} from "react-native-elements";
+
+
 export const LayoutTable = (props) => {
     const [isBusyTable , setIsBusyTable] = React.useState(false)
     const  table = {
         tableData: [
-            ['3', '4', '', '8','6'],
-            ['', '6', '4', '8','4'],
-            ['4', '3', '6', '8','8'],
-            ['4', '', '', '8','4'],
-            ['4', '', '', '','6'],
+   [ {id:1,chair:3,img:P3,x:1,y:1}, {id:2,chair:4,img:P4,x:1,y:2}, '', {id:3,chair:8,img: P8,x:1,y:4},{id:4,chair:6,img: P6,x:1,y:5 }],
+    [ '', {id:5,chair:6,img:P6,x:2,y:2}, {id:6,chair:4,img:P4,x:2,y:3}, {id:7,chair:8,img: P8,x:2,y:4},{id:8,chair:8,img: P8,x:2,y:5}],
+     [{id:18,chair:4,img:P4,x:3,y:1}, {id:9,chair:3,img:P3,x:3,y:2}, {id:10,chair:6,img:P6,x:3,y:3}, {id:11,chair:8,img: P8,x:3,y:4},{id:12,chair:8,img: A8,x:3,y:5}],
+     [{id:13,chair:4,img:P4,x:4,y:1}, '', '', {id:14,chair:8,img: P8,x:4,y:4},{id:15,chair:4,img:P4,x:4,y:5}],
+     [{id:16,chair:4,img:P4,x:5,y:1}, '', '', '',{id:17,chair:6,img:P6,x:5,y:5}]
 
         ]
     }
+    const [res, setRes] = React.useState('')
     // let imgSrc = data==='8'?table.img[4]:data==='6'?table.img[2]:data==='3'?table.img[5]:data==='4'?table.img[3]:table.img[6]
     // source={require(`../../../../assets/images/table/${imgSrc}`)}
     const choseTable = (data) => {
-            props.navigation.push('Таблица бронирования',`Стол  ${data}`);
-            if(isBusyTable) {
-                setIsBusyTable(false)
-            }else {
-                setIsBusyTable(true)
-            }
+        setRes(data.id)
+            // props.navigation.push('Таблица бронирования',`Стол  ${data}`);
+            // if(isBusyTable) {
+            //     setIsBusyTable(false)
+            // }else {
+            //     setIsBusyTable(true)
+            // }
     }
     const element = (data, index) => {
-        let imgSrc = data==='8'?P8:data==='6'?P6:data==='3'?P3:data==='4'?P4:trans
+
       return(<View>
               <TouchableOpacity onPress={() =>choseTable(data)} activeOpacity={0.6}>
+                  <View style={res==data.id?styles.res:''}>
                   <Image
-                      source={imgSrc}
+                      // source={data.img?data.img:trans}
+                      source={data.img?tab:trans}
                       style={styles.imgTable}>
-                <Text style={styles.text}>{data==='3'?3:data==='4'?4:data==='6'?6:data==='8'?8:''}</Text>
+
+                <Text style={styles.text}>{data.chair}</Text>
+
             </Image >
+                  </View>
         </TouchableOpacity>
           </View>
       )
     };
+    debugger
     return(  <View style={styles.container}>
         <ImageBackground resizeMode="stretch"
                          source={require('../../../../../assets/images/table/maket.jpg')} style={styles.image}>
@@ -93,10 +104,18 @@ const styles = StyleSheet.create({
 
     },
     imgTable: {
-        width:50,
-        height: 35,
+        width:30,
+        height: 30,
+        // backgroundColor:"#FAB023",
         alignItems: 'center',
         justifyContent: 'center' ,
+    },
+    res:{
+        backgroundColor:'#FAB023',
+        width:30,height:30,
+        borderRadius:15 ,
+        alignItems:'center',
+        justifyContent:'center'
     },
    text: { textAlign: 'center', color: '#000',fontSize:18 }
 });

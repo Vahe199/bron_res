@@ -1,9 +1,15 @@
 import React from "react";
 import {StyleSheet, Text, View, Image, TouchableOpacity, FlatList} from "react-native";
 import { Divider} from 'react-native-elements'
-import {useSelector} from "react-redux";
+import {REST_LOGO_API} from "@env"
+import {useDispatch, useSelector} from "react-redux";
+import {getIndividualRestaurantsData} from "../../redux/action/individualrestaurant-action";
+import logo from "../../../assets/logo.png"
 function RestItem({restaurant,navigation}) {
-const individualRestHandler = (resName) => {
+    console.log(restaurant)
+    const dispatch = useDispatch()
+const individualRestHandler = async (resName,id) => {
+    await dispatch(getIndividualRestaurantsData(resName,10000006))
     navigation.push('Индивидуальный рест',resName)
 }
     return (
@@ -12,16 +18,16 @@ const individualRestHandler = (resName) => {
                       data={restaurant} keyExtractor={(item, index) => index.toString()}
                       renderItem={({item}) => (
                           <TouchableOpacity activeOpacity={0.7} style={styles.wrapper}
-                                            onPress={()=>individualRestHandler(item.name)}>
+                                            onPress={()=>individualRestHandler(item.restaurant_name,item.id)}>
                               <View style={styles.container}>
                                   <Image
                                       style={styles.image}
                                       resizeMode="cover"
-                                      source={{ uri: item.logo }}
+                                      source={ logo/* { uri: `${REST_LOGO_API}${item.logo}` }*/}
                                   />
                                   <Divider orientation="vertical" width={2} style={styles.divider} />
                                   <View style={styles.textContainer}>
-                                      <Text style={styles.name}>{item.name}</Text>
+                                      <Text style={styles.name}>{item.restaurant_name}</Text>
                                       <Text style={styles.address}>{item.address}</Text>
                                   </View>
                                   <Image style={styles.imageIcon}

@@ -5,36 +5,36 @@ import {
     Text,
     View,
     TouchableOpacity,
-    ScrollView, SafeAreaView, LogBox,
+    ScrollView, LogBox,
 } from "react-native";
 import RestItem from "./RestaurantsItem";
 import Filter from "../Include/Filter";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {ModalPicker} from "../Include/ModalPicker";
 import {AntDesign} from "@expo/vector-icons";
 import {ButtonList} from "./ButtonList/ButtonList";
-
+import {fetchTopPageData} from "../../redux/action/topRestaurant-action";
+import Splash from "../Include/Splash";
 
 function RestaurantsScreen(props) {
+    const dispatch = useDispatch()
     const [chooseData, setChooseData] = React.useState("Выбрать город");
     const [isModalVisible, setIsModalVisible] = React.useState(false);
-    const {topRest} = useSelector(state => state.topPage)
+    const {topRest, loading} = useSelector(state => state.topPage)
     const changeModalVisibility = () => {
         if(isModalVisible){
             setIsModalVisible(false)
-        }else {
-            setIsModalVisible(true)
-        }
-
+        }else {setIsModalVisible(true)}
     }
     const setData = (city) => {
         setChooseData(city)
     }
     React.useEffect(() => {
+        dispatch(fetchTopPageData())
         LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     }, [])
 
-    return (
+    return ( loading ? <Splash/>:
         <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={{flex: 1}}>
             <ScrollView contentContainerStyle={{padding:20}} showsVerticalScrollIndicator={false}>
                 <View style={styles.touchable}>

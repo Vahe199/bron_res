@@ -1,17 +1,9 @@
-import axios from "axios";
+import {restaurantsApi} from "../../api/api";
 
 const  FETCH_RESTAURANT_ROOM_DATA = 'FETCH_RESTAURANT_ROOM_DATA';
 const  FETCH_RESTAURANT_ROOM_DATA_SUCCESS = 'FETCH_RESTAURANT_ROOM_DATA_SUCCESS';
 const  FETCH_RESTAURANT_ROOM_DATA_ERROR = 'FETCH_RESTAURANT_ROOM_DATA_ERROR';
-import A3 from "../../../assets/images/table/a3.png";
-import A4 from "../../../assets/images/table/a4.png";
-import A6 from "../../../assets/images/table/a6.png";
-import A8 from "../../../assets/images/table/a8.png";
-import P3 from "../../../assets/images/table/p3.png"
-import P4 from "../../../assets/images/table/p4.png"
-import P6 from "../../../assets/images/table/p6.png"
-import P8 from "../../../assets/images/table/p8.png"
-import trans from "../../../assets/images/table/transparent.png"
+
 
 let initialState = {
 
@@ -83,10 +75,11 @@ export const individualRestaurantReducer = (state = initialState, action) =>{
 
 }
 
-export const getIndividualRestaurantsData = (category) => async (dispatch) => {
+export const getIndividualRestaurantsData = (category,id) => async (dispatch) => {
     try {
             dispatch({type:FETCH_RESTAURANT_ROOM_DATA})
-             const {data} = await axios.post('http://restoran.fab.nu/')
+             const {data} = await restaurantsApi.getIndividualRestData(id)
+        console.log(data,"ind")
              dispatch({type:FETCH_RESTAURANT_ROOM_DATA_SUCCESS, payload:data})
         }catch (e) {
             dispatch({type:FETCH_RESTAURANT_ROOM_DATA_ERROR})

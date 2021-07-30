@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    Text,
     View,
     StyleSheet,
     TouchableOpacity,
@@ -11,7 +10,6 @@ import {useSelector} from "react-redux";
 import {ButtonList} from "./ButtonList/ButtonList";
 
 function NearMe(props) {
-    const height = Dimensions.get("window").height
     const {rest} = useSelector(state => state.topPage)
 
     return (

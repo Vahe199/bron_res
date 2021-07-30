@@ -8,8 +8,8 @@ import {
     useWindowDimensions,
     ScrollView, ImageBackground
 } from "react-native";
-import {useDispatch, useSelector} from "react-redux";
-import {TableItem} from "./TableItem";
+import {useSelector} from "react-redux";
+import {BACKGROUND_IMG_URL} from "@env"
 import Splash from "../../../Include/Splash";
 
 
@@ -24,7 +24,7 @@ const {room,loading} = useSelector(state => state.individualPage);
                           contentContainerStyle={{paddingVertical:50}}>
       <View style={[styles.container,{width}]}>
           <ImageBackground resizeMode="stretch"
-              source={{ uri:`http://restoran.fab.nu/assets/images-background-floor-plane/${item.background_img}`}}
+              source={{ uri:`${BACKGROUND_IMG_URL}${item.background_img}`}}
                            style={[styles.image,{width:width-30}]}>
            {/*<TableItem {...props} item={item}/>*/}
           </ImageBackground>

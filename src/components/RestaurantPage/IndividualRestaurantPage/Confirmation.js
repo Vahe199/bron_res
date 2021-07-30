@@ -2,8 +2,7 @@ import React from "react";
 import {StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import {Header} from "../../Include/Header";
-export const
-    Confirmation = (props) => {
+export const Confirmation = (props) => {
 
     return (
 <View style={{flex:1}}>
