@@ -1,19 +1,16 @@
 import React from "react";
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import {getRestaurantsData} from "../../redux/action/restaurant-action";
+import {getRestaurantsCategory} from "../../redux/action/restaurant-action";
 
 const Filter = (props) => {
     const dispatch = useDispatch()
 const {category} = useSelector(state => state.topPage)
+const {selectedCategory} = useSelector(state => state.restaurantPage)
     const getCategoryHandler = async (category) => {
-        if(props.route.name === "Категория"){
-           await dispatch(getRestaurantsData(category))
+           await dispatch(getRestaurantsCategory(category))
             props.navigation.push('Категория',category+ ' ' + 'бары')
-        }else {
-             await dispatch(getRestaurantsData(category))
-            props.navigation.push('Категория',category+ ' ' + 'бары')
-        }
+
     }
 
     return(
@@ -29,9 +26,9 @@ const {category} = useSelector(state => state.topPage)
                       data={category}
                       keyExtractor={(item,index) => index.toString()}
                       renderItem={({item}) => (
-                          <TouchableOpacity activeOpacity={0.5} key={item.id} disabled={props.visible}
+                          <TouchableOpacity activeOpacity={0.5} key={item.id}
                                             onPress={()=>getCategoryHandler(item.name)}
-                                            style={styles. FilterBtn} >
+                                            style={selectedCategory === item.name?[styles. FilterBtn,styles.active]:styles. FilterBtn} >
                               <Text style={styles.textBtn}>{item.name}</Text>
                           </TouchableOpacity>
                       )}/>
@@ -42,6 +39,8 @@ const {category} = useSelector(state => state.topPage)
 const styles = StyleSheet.create({
     view:{
         flexDirection:'row',
+        marginTop: 10
+
     },
     FilterBtn:{
         marginRight:10,
@@ -68,6 +67,9 @@ const styles = StyleSheet.create({
         lineHeight: 21,
         fontWeight: "600",
         color: '#000',
+    },
+    active:{
+        backgroundColor:'#e9e9e9'
     },
     text:{
         fontSize:20,

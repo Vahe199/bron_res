@@ -11,6 +11,7 @@ import {
 import {useSelector} from "react-redux";
 import {BACKGROUND_IMG_URL} from "@env"
 import Splash from "../../../Include/Splash";
+import {TableItem} from "./TableItem";
 
 
 export const RoomItem = (props) => {
@@ -26,7 +27,7 @@ const {room,loading} = useSelector(state => state.individualPage);
           <ImageBackground resizeMode="stretch"
               source={{ uri:`${BACKGROUND_IMG_URL}${item.background_img}`}}
                            style={[styles.image,{width:width-30}]}>
-           {/*<TableItem {...props} item={item}/>*/}
+           <TableItem {...props} item={item}/>
           </ImageBackground>
           <Text style={styles.title}>{item.hall_name}</Text>
           <Text style={styles.text} >{item.description}</Text>
@@ -43,26 +44,26 @@ const {room,loading} = useSelector(state => state.individualPage);
     return (
         loading ? <Splash/>:
         <View>
-            <View style={styles.view}>
+            {/*<View style={styles.view}>*/}
 
-                <FlatList horizontal
-                           pagingEnabled
-                          bounces={false}
-                          showsHorizontalScrollIndicator={false}
-                          data={room}
-                          keyExtractor={(item, index) => index.toString()}
-                          onScroll={Animated.event([{nativeEvent:{contentOffset:{x: scrollX}}}],
-                              {useNativeDriver:false})}
-                          onViewableItemsChanged={viewableItemsChanged}
-                         viewabilityConfig={{viewAreaCoveragePercentThreshold: 50}}
-                          renderItem={oneRenderItem}
-                ref={slidesRef}/>
-                <View style={{flexDirection:'row',marginTop:5}}>
-                {room?.map((item,i)=>
-                    <View style={i==currentIndex?styles.room:styles.rooms} key={i}/>
-                )}
-                </View>
-            </View>
+            {/*    <FlatList horizontal*/}
+            {/*               pagingEnabled*/}
+            {/*              bounces={false}*/}
+            {/*              showsHorizontalScrollIndicator={false}*/}
+            {/*              data={room}*/}
+            {/*              keyExtractor={(item, index) => index.toString()}*/}
+            {/*              onScroll={Animated.event([{nativeEvent:{contentOffset:{x: scrollX}}}],*/}
+            {/*                  {useNativeDriver:false})}*/}
+            {/*              onViewableItemsChanged={viewableItemsChanged}*/}
+            {/*             viewabilityConfig={{viewAreaCoveragePercentThreshold: 50}}*/}
+            {/*              renderItem={oneRenderItem}*/}
+            {/*    ref={slidesRef}/>*/}
+            {/*    <View style={{flexDirection:'row',marginTop:5}}>*/}
+            {/*    {room?.map((item,i)=>*/}
+            {/*        <View style={i==currentIndex?styles.room:styles.rooms} key={i}/>*/}
+            {/*    )}*/}
+            {/*    </View>*/}
+            {/*</View>*/}
         </View>
     )
 }

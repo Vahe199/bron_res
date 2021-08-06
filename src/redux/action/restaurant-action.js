@@ -62,7 +62,7 @@ let initialState = {
             logo: 'https://www.elgarden.am/wp-content/uploads/2017/04/MG_3561.jpg'
         }
         ],
-    title:'',
+    selectedCategory:'',
     error:null,
     loading:false
 };
@@ -73,7 +73,7 @@ export const restaurantReducer = (state = initialState, action) =>{
         case GET_RESTAURANT_DATA:
             return {...state,error: null, loading: true};
         case GET_RESTAURANT_DATA_SUCCESS:
-             return {...state,error: null,loading: false,title:action.payload};
+             return {...state,error: null,loading: false,selectedCategory:action.payload};
         case GET_RESTAURANT_DATA_ERROR:
             return {...state,error: true,loading: false}
 
@@ -82,7 +82,7 @@ export const restaurantReducer = (state = initialState, action) =>{
 
 }
 
-export const getRestaurantsData = (category) => async (dispatch) => {
+export const getRestaurantsCategory = (category) => async (dispatch) => {
         try {
             dispatch({type:GET_RESTAURANT_DATA})
              const response = category

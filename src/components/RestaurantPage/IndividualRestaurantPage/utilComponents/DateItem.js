@@ -11,10 +11,10 @@ export const DateFilter = () => {
     const [show, setShow] = useState(false);
     const [time, setTime] = useState(new Date());
 
+
     const onChange = (event, selectedValue) => {
         setShow(Platform.OS === 'ios');
         if(mode === 'datetime'){
-            console.log(selectedValue,mode,889)
             setTime(selectedValue);
             setDate(selectedValue);
         } else if (mode == 'date') {
@@ -42,13 +42,13 @@ export const DateFilter = () => {
             showMode('datetime');
         }
     };
-
+    const dateta = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}/${time.getHours()}:${time.getHours()}`
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={showDatepicker} style={styles.pickedDateContainer} activeOpacity={0.7}>
                 <Text style={styles.pickedDate}>{date.getDate()}/{date.getMonth() +1}/{date.getFullYear()}</Text>
                 <Divider orientation="vertical" width={1} style={styles.divider} />
-                <Text style={styles.pickedDate}>{time.getHours()}:{time.getMinutes()}</Text>
+                <Text style={styles.pickedDate}>{time.getHours()}:{time.getHours()}</Text>
                 <Divider orientation="vertical" width={1} style={styles.divider} />
                 <Image source={calendar} style={{width:35,height:29}}/>
             </TouchableOpacity>

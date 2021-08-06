@@ -24,12 +24,7 @@ const MapsScreen = (props) => {
         {id:10,latitude:40.20318473590025,longitude: 44.5375001616776, name:'test', category:'Shawurma'},
         {id:11,latitude:40.18352771080333,longitude:44.5174365, name:'test',category:'Sushi'},
     ]
-    const [region, setRegion] = React.useState({
-        coordinate:{
-            latitude: null,
-            longitude: null
-        }
-    })
+
     const marcRef = React.useRef()
     const [pin, setPin] = React.useState({
         latitude: null,
@@ -44,7 +39,7 @@ const MapsScreen = (props) => {
             }
             let location = await Location.getCurrentPositionAsync({});
             setPin({latitude:location.coords.latitude, longitude: location.coords.longitude});
-           await setIsLoading(false)
+            setIsLoading(false)
         })();
     }, []);
 
@@ -63,7 +58,6 @@ const MapsScreen = (props) => {
                      }}
                      showsUserLocation={true}
                      showsMyLocationButton={false}
-                     // onRegionChangeComplete={(region) => console.log(region, 123)}
                      provider={PROVIDER_GOOGLE}>
                 {
                     coordinates.map((el, index) => {

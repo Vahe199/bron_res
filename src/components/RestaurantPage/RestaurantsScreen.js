@@ -4,52 +4,40 @@ import {
     ImageBackground,
     Text,
     View,
-    TouchableOpacity,
     ScrollView, LogBox,
 } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
+import {useDispatch, useSelector} from "react-redux";
 import RestItem from "./RestaurantsItem";
 import Filter from "../Include/Filter";
-import {useDispatch, useSelector} from "react-redux";
-import {ModalPicker} from "../Include/ModalPicker";
-import {AntDesign} from "@expo/vector-icons";
+import {CityFilter} from "../Include/CityFilter";
 import {ButtonList} from "./ButtonList/ButtonList";
-import {fetchTopPageData} from "../../redux/action/topRestaurant-action";
+import {changeSelectedCity, fetchTopPageData} from "../../redux/action/topRestaurant-action";
 import Splash from "../Include/Splash";
+import {getRestaurantsCategory} from "../../redux/action/restaurant-action";
+
 
 function RestaurantsScreen(props) {
     const dispatch = useDispatch()
-    const [chooseData, setChooseData] = React.useState("Выбрать город");
-    const [isModalVisible, setIsModalVisible] = React.useState(false);
     const {topRest, loading} = useSelector(state => state.topPage)
-    const changeModalVisibility = () => {
-        if(isModalVisible){
-            setIsModalVisible(false)
-        }else {setIsModalVisible(true)}
-    }
-    const setData = (city) => {
-        setChooseData(city)
-    }
-    React.useEffect(() => {
-        dispatch(fetchTopPageData())
-        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-    }, [])
+    useFocusEffect(
+        React.useCallback(() => {
+            dispatch(fetchTopPageData())
+            dispatch(getRestaurantsCategory(''))
+            dispatch(changeSelectedCity('Выбрать город'))
+            LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+            return () => null;
+        }, [])
+    );
 
     return ( loading ? <Splash/>:
         <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={{flex: 1}}>
-            <ScrollView contentContainerStyle={{padding:20}} showsVerticalScrollIndicator={false}>
-                <View style={styles.touchable}>
-                    <TouchableOpacity style={styles.button} activeOpacity={0.5}
-                                      onPress={changeModalVisibility}>
-                        <Text style={styles.textBtn}>{chooseData}</Text>
-                        <AntDesign name={isModalVisible ? "up" : "down"} size={18} color="black"/>
-                    </TouchableOpacity>
-                    <View style={styles.item}>
-                        {isModalVisible && <ModalPicker setData={setData}
-                                                        changeModalVisibility={changeModalVisibility}/>}
-                    </View>
+            <ScrollView contentContainerStyle={{paddingVertical:20, paddingHorizontal:15}} showsVerticalScrollIndicator={false}>
+                <View style={styles.filterCity}>
+                       <CityFilter {...props}/>
                 </View>
                 <View style={styles.filter}>
-                    <Filter {...props} visible={isModalVisible}/>
+                    <Filter {...props}/>
                 </View>
                 <View style={{paddingVertical: 20}}>
                     <Text style={styles.text}>Рядом со мной</Text>
@@ -67,10 +55,8 @@ function RestaurantsScreen(props) {
 }
 
 const styles = StyleSheet.create({
-    touchable: {
-        width:200,
-        paddingVertical:15,
-        zIndex:1
+    filterCity: {
+        alignItems:'flex-start'
     },
     filter: {
         paddingTop: 5,
@@ -81,37 +67,11 @@ const styles = StyleSheet.create({
         zIndex:2,
         elevation:2
     },
-    button: {
-        flexDirection:'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width:205,
-        height: 42,
-        borderRadius: 7,
-        elevation: 3,
-        alignSelf: 'stretch',
-        paddingHorizontal: 20,
-        marginBottom:5,
-        backgroundColor: '#fff',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-    },
     text: {
         fontSize: 20,
         fontWeight: "600",
     },
 
-    textBtn: {
-        fontSize: 18,
-        lineHeight: 21,
-        fontWeight: "600",
-        color: '#000',
-    }
 
 })
 export default RestaurantsScreen;

@@ -4,6 +4,7 @@ import {Header} from "../Include/Header";
 import Filter from "../Include/Filter";
 import CardItem from "./CardItem";
 import {useSelector} from "react-redux";
+import {CityFilter} from "../Include/CityFilter";
 
 
 const CategoryScreen = (props) => {
@@ -14,6 +15,9 @@ const CategoryScreen = (props) => {
         <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={styles.root}>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
             <View style={styles.container} >
+                <View style={{alignItems:'flex-end',marginBottom:-25}}>
+                    <CityFilter/>
+                </View>
                 <View style={styles.filter}>
                     <Filter {...props}/>
                 </View>
@@ -46,8 +50,9 @@ const styles = StyleSheet.create({
     filter:{
          alignItems: 'center',
          marginBottom:'10%',
-         width:320,
-         marginLeft:'5%'
+        flexDirection: 'row'
+         // width:320,
+         // marginLeft:'5%'
     },
     list:{
          alignItems:'center',

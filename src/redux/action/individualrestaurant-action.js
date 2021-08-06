@@ -79,7 +79,6 @@ export const getIndividualRestaurantsData = (category,id) => async (dispatch) =>
     try {
             dispatch({type:FETCH_RESTAURANT_ROOM_DATA})
              const {data} = await restaurantsApi.getIndividualRestData(id)
-        console.log(data,"ind")
              dispatch({type:FETCH_RESTAURANT_ROOM_DATA_SUCCESS, payload:data})
         }catch (e) {
             dispatch({type:FETCH_RESTAURANT_ROOM_DATA_ERROR})

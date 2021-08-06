@@ -4,6 +4,7 @@ import {restaurantsApi} from "../../api/api";
 const  FETCH_HOMEPAGE_DATA = 'FETCH_HOMEPAGE_DATA';
 const  FETCH_HOMEPAGE_DATA_SUCCESS = 'FETCH_HOMEPAGE_DATA_SUCCESS';
 const  FETCH_HOMEPAGE_DATA_ERROR = 'FETCH_HOMEPAGE_DATA_ERROR';
+const  CHANGE_SELECTED_CITY = 'CHANGE_SELECTED_CITY';
 
 let initialState = {
      category: [
@@ -99,6 +100,7 @@ let initialState = {
             logo: 'https://www.virtlo.com/uploads/places/39/39/kubbf516asghqsry1imfysnid.png'
         },
     ],
+    selectedCity:'Выбрать город',
     error:null,
     loading:false
 };
@@ -113,13 +115,16 @@ export const topPageReducer = (state = initialState, action) =>{
                  category:action.payload.Restaurant_catigory,
                  topRest:action.payload.Restaurant_top};
         case FETCH_HOMEPAGE_DATA_ERROR:
-            return {error: true,loading: false}
+            return {error: true,loading: false};
+        case CHANGE_SELECTED_CITY:
+            return {...state,selectedCity:action.payload}
 
         default:return state;
     }
 
 }
 
+export const changeSelectedCity = (payload) =>({type:CHANGE_SELECTED_CITY,payload})
 export const fetchTopPageData = () => async (dispatch) => {
     try {
         dispatch({type:FETCH_HOMEPAGE_DATA})

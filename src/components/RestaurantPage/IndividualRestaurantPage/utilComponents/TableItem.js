@@ -15,10 +15,10 @@ import P3 from "../../../../../assets/images/table/p3.png";
 import P4 from "../../../../../assets/images/table/p4.png";
 import trans from "../../../../../assets/images/table/transparent.png";
 export const TableItem = ({navigation,item}) => {
+    console.log(item,"item")
     const {width, height} = useWindowDimensions();
     const [isBusyTable , setIsBusyTable] = React.useState(false)
     const choseTable = (data) => {
-        console.log(data)
         // props.navigation.push('Reservation Table',`Table ${data}`);
         if(isBusyTable) {
             setIsBusyTable(false)
@@ -26,7 +26,6 @@ export const TableItem = ({navigation,item}) => {
             setIsBusyTable(true)
         }
     }
-    // let imgSrc = data==='8'?P8:data==='6'?P6:data==='3'?P3:data==='4'?P4:trans
         const element = (data, index) => (
             <TouchableOpacity onPress={() =>choseTable(data)} activeOpacity={0.8} >
                 <Image

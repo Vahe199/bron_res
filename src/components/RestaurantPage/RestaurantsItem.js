@@ -6,11 +6,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {getIndividualRestaurantsData} from "../../redux/action/individualrestaurant-action";
 import logo from "../../../assets/logo.png"
 function RestItem({restaurant,navigation}) {
-    console.log(restaurant)
     const dispatch = useDispatch()
 const individualRestHandler = async (resName,id) => {
     await dispatch(getIndividualRestaurantsData(resName,10000006))
-    navigation.push('Индивидуальный рест',resName)
+     navigation.push('Индивидуальный рест',resName)
 }
     return (
         <View style={{flex:1}}>
