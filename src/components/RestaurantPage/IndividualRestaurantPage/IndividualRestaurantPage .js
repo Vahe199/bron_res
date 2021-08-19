@@ -6,16 +6,17 @@ import {
     View
 } from "react-native";
 import {RoomItem} from "./utilComponents/RoomItem";
+import {useSelector} from "react-redux";
 
 export const IndividualRestaurantPage = (props) => {
-
+    const {room} = useSelector(state => state.individualPage);
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
                     <View style={styles.container}>
                             <RoomItem/>
                         <View>
                             <TouchableOpacity activeOpacity={0.7}
-                                              onPress={() => props.navigation.navigate('Таблица бронирования', 'Зал N')}
+                                              onPress={() => props.navigation.navigate('Таблица бронирования', room.hall_name)}
                                               style={styles.button}>
                                 <Text style={styles.textBtn}>Забронировать столик</Text>
                             </TouchableOpacity>

@@ -8,27 +8,25 @@ import {
     useWindowDimensions,
     ScrollView, ImageBackground
 } from "react-native";
-import {useSelector} from "react-redux";
-import {BACKGROUND_IMG_URL} from "@env"
+import {useDispatch, useSelector} from "react-redux";
 import Splash from "../../../Include/Splash";
 import {TableItem} from "./TableItem";
+import {fetchRoomItem} from "../../../../redux/action/individualrestaurant-action";
 
 
 export const RoomItem = (props) => {
-const {room,loading} = useSelector(state => state.individualPage);
+    const dispatch = useDispatch()
+const {Restaurant,loading} = useSelector(state => state.individualPage);
     const width = useWindowDimensions().width;
     const oneRenderItem = ({item}) => {
-
         return (
             <ScrollView   showsVerticalScrollIndicator={false}
                           showsHorizontalScrollIndicator={false}
                           contentContainerStyle={{paddingVertical:50}}>
       <View style={[styles.container,{width}]}>
-          <ImageBackground resizeMode="stretch"
-              source={{ uri:`${BACKGROUND_IMG_URL}${item.background_img}`}}
-                           style={[styles.image,{width:width-30}]}>
-           <TableItem {...props} item={item}/>
-          </ImageBackground>
+          <View  style={[styles.tableItem,{width:width-30}]}>
+           <TableItem {...props} data={item.data} table_x={item.table_x} background_img={item.background_img}/>
+          </View>
           <Text style={styles.title}>{item.hall_name}</Text>
           <Text style={styles.text} >{item.description}</Text>
       </View>
@@ -38,32 +36,35 @@ const {room,loading} = useSelector(state => state.individualPage);
     const [currentIndex,setCurrentIndex] = useState(0)
     const scrollX = useRef(new Animated.Value(0)).current
     const slidesRef = useRef()
-    const viewableItemsChanged = useRef(({viewableItems})=>{
+    const viewableItemsChanged = useRef( ({viewableItems})=>{
+         dispatch(fetchRoomItem(viewableItems[0].item))
         setCurrentIndex(viewableItems[0].index)
+
     }).current
+    const viewConfigRef = React.useRef({ viewAreaCoveragePercentThreshold: 50 }).current
     return (
         loading ? <Splash/>:
         <View>
-            {/*<View style={styles.view}>*/}
+            <View style={styles.view}>
 
-            {/*    <FlatList horizontal*/}
-            {/*               pagingEnabled*/}
-            {/*              bounces={false}*/}
-            {/*              showsHorizontalScrollIndicator={false}*/}
-            {/*              data={room}*/}
-            {/*              keyExtractor={(item, index) => index.toString()}*/}
-            {/*              onScroll={Animated.event([{nativeEvent:{contentOffset:{x: scrollX}}}],*/}
-            {/*                  {useNativeDriver:false})}*/}
-            {/*              onViewableItemsChanged={viewableItemsChanged}*/}
-            {/*             viewabilityConfig={{viewAreaCoveragePercentThreshold: 50}}*/}
-            {/*              renderItem={oneRenderItem}*/}
-            {/*    ref={slidesRef}/>*/}
-            {/*    <View style={{flexDirection:'row',marginTop:5}}>*/}
-            {/*    {room?.map((item,i)=>*/}
-            {/*        <View style={i==currentIndex?styles.room:styles.rooms} key={i}/>*/}
-            {/*    )}*/}
-            {/*    </View>*/}
-            {/*</View>*/}
+                <FlatList horizontal
+                           pagingEnabled
+                          bounces={false}
+                          showsHorizontalScrollIndicator={false}
+                          data={Restaurant}
+                          keyExtractor={(item, index) => index.toString()}
+                          onScroll={Animated.event([{nativeEvent:{contentOffset:{x: scrollX}}}],
+                              {useNativeDriver:false})}
+                          onViewableItemsChanged={viewableItemsChanged}
+                         viewabilityConfig={viewConfigRef}
+                          renderItem={oneRenderItem}
+                ref={slidesRef}/>
+                <View style={{flexDirection:'row',marginTop:5}}>
+                {Restaurant?.map((item,i)=>
+                    <View style={i==currentIndex?styles.room:styles.rooms} key={i}/>
+                )}
+                </View>
+            </View>
         </View>
     )
 }
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    image:{
+    tableItem:{
         flex:0.7,
         alignItems:'center',
         justifyContent:'center',

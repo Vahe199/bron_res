@@ -1,9 +1,14 @@
 import React from "react";
-import {StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground} from "react-native";
-import {AntDesign} from "@expo/vector-icons";
-import {Header} from "../../Include/Header";
+import {StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground, Platform, Linking} from "react-native";
+import {useSelector} from "react-redux";
 export const Confirmation = (props) => {
-
+    const {phone} = useSelector(state => state.individualPage)
+    const dialCall = (number) => {
+        let phoneNumber = '';
+        if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
+        else {phoneNumber = `telprompt:${number}`; }
+        Linking.openURL(phoneNumber);
+    };
     return (
 <View style={{flex:1}}>
     <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex:1}}>
@@ -24,8 +29,7 @@ export const Confirmation = (props) => {
                 <Text style={styles.textBtn}>Закрывать</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity activeOpacity={0.5}
-                              // onPress={() => props.navigation.push('Message')}
+            <TouchableOpacity activeOpacity={0.5} onPress={() =>dialCall(phone)}
                               style={[styles.button,styles.btnMsg]}>
                 <Text style={[styles.textBtn,{color: '#fe921f'}]}>Обратная связь</Text>
             </TouchableOpacity>

@@ -8,19 +8,22 @@ import {
     View
 } from "react-native";
 import {ReserveForm} from "./utilComponents/ReserveForm";
-import {LayoutTable} from "./utilComponents/LayoutTable";
 import {DateFilter} from "./utilComponents/DateItem";
+import {TableItem} from "./utilComponents/TableItem";
+import {useSelector} from "react-redux";
 
 
 export const TableReservationPage = (props) => {
+    const {room} = useSelector(state => state.individualPage);
+     console.log(room,'room')
     const [count, setCount] = React.useState(4)
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
         <SafeAreaView style={{flex: 1}}>
             <ScrollView contentContainerStyle={{paddingVertical: 1}}>
         <View style={styles.container}>
-            <View style={styles.floorPlan}>
-                    <LayoutTable {...props}/>
+            <View>
+                    <TableItem {...props} data={room.data} table_x={room.table_x} background_img={room.background_img}/>
             </View>
             <View style={styles.resDate}>
                 <Text style={styles.text}>Дата и время бронирования</Text>
@@ -57,14 +60,6 @@ const styles = StyleSheet.create({
         padding: 20
     },
 
-    floorPlan: {
-        backgroundColor: '#fff',
-        height: 250,
-        width: '100%',
-         padding: 2,
-         borderRadius:5,
-         borderWidth:0.2
-    },
     button: {
         width:50,
         height:45,

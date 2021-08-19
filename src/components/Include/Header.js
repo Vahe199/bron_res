@@ -3,9 +3,10 @@ import {Image, Linking, Platform, StyleSheet, Text, TextInput, TouchableOpacity,
 import {MaterialIcons} from "@expo/vector-icons";
 import {LinearGradient} from "expo-linear-gradient";
 import arrowBack from "../../../assets/images/Back.png";
-import phone from "../../../assets/images/phoneIcon.png";
+import phoneIcon from "../../../assets/images/phoneIcon.png";
 import transparent from "../../../assets/images/table/transparent.png"
 import {SearchQuery} from "./SearchQuery";
+import {useSelector} from "react-redux";
 
 
 export const Header = (props) => {
@@ -13,6 +14,7 @@ export const Header = (props) => {
     const [searchShow, setSearchShow] = React.useState(false);
     const [filterData, setFilterData] = React.useState([]);
     const [masterData, setMasterData] = React.useState([]);
+    const {restaurant_name,phone} = useSelector(state => state.individualPage)
   const dialCall = (number) => {
         let phoneNumber = '';
         if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
@@ -70,8 +72,8 @@ export const Header = (props) => {
                                              onChangeText={searchFilter}
                                              value={searchQuery}
                     /> : <Text style={styles.headerText}>{props.scene?.route.params?props.scene?.route.params : props.scene?.route.name}</Text>}
-                    {props.scene?.descriptor.options.call ? <TouchableOpacity onPress={() =>dialCall(+37499069020)}>
-                        <Image source={phone} style={{width: 27, height: 27}}/>
+                    {props.scene?.descriptor.options.call ? <TouchableOpacity onPress={() =>dialCall(phone)}>
+                        <Image source={phoneIcon} style={{width: 27, height: 27}}/>
                         </TouchableOpacity>
                         :props.scene?.descriptor.options.arrowBack ?  <Image source={transparent} style={{width: 27, height: 27}}/>
                    : <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>
