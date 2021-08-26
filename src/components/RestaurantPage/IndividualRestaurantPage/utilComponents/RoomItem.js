@@ -18,6 +18,7 @@ export const RoomItem = (props) => {
     const dispatch = useDispatch()
 const {Restaurant,loading} = useSelector(state => state.individualPage);
     const width = useWindowDimensions().width;
+    const [tableId, setTableId] = React.useState(null)
     const oneRenderItem = ({item}) => {
         return (
             <ScrollView   showsVerticalScrollIndicator={false}
@@ -25,7 +26,7 @@ const {Restaurant,loading} = useSelector(state => state.individualPage);
                           contentContainerStyle={{paddingVertical:50}}>
       <View style={[styles.container,{width}]}>
           <View  style={[styles.tableItem,{width:width-30}]}>
-           <TableItem {...props} data={item.data} table_x={item.table_x} background_img={item.background_img}/>
+           <TableItem {...props} data={item.data} tableId={tableId} setTableId={setTableId} table_x={item.table_x} table_y={item.table_y} background_img={item.background_img}/>
           </View>
           <Text style={styles.title}>{item.hall_name}</Text>
           <Text style={styles.text} >{item.description}</Text>
@@ -36,7 +37,7 @@ const {Restaurant,loading} = useSelector(state => state.individualPage);
     const [currentIndex,setCurrentIndex] = useState(0)
     const scrollX = useRef(new Animated.Value(0)).current
     const slidesRef = useRef()
-    const viewableItemsChanged = useRef( ({viewableItems})=>{
+    const viewableItemsChanged = useRef(  ({viewableItems})=>{
          dispatch(fetchRoomItem(viewableItems[0].item))
         setCurrentIndex(viewableItems[0].index)
 

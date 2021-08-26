@@ -76,7 +76,7 @@ export const ReserveForm = ({navigation,tableId,date,count}) => {
                 </Animated.View>}
                 <Formik
                     initialValues={{name: '', phone: ''}}
-                     // validationSchema={SignupSchema}
+                      validationSchema={SignupSchema}
                     onSubmit={(values, action) => {
                         sendFormData(values)
                         action.resetForm();

@@ -4,7 +4,9 @@ import { Divider} from 'react-native-elements'
 import {REST_LOGO_API} from "@env"
 import {useDispatch} from "react-redux";
 import {getIndividualRestaurantsData} from "../../redux/action/individualrestaurant_action_&_reducer";
-import logo from "../../../assets/logo.png"
+import logo from "../../../assets/logo.png";
+
+
 function RestItem({restaurant,navigation}) {
     const dispatch = useDispatch()
 const individualRestHandler = async (resName,id) => {

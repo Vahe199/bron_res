@@ -1,14 +1,21 @@
 import React from "react";
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import {getRestaurantsCategory} from "../../redux/action/restaurant_action_&_reducer";
+import {
+    fetchCategoryAndCityFilterRestaurantsData,
+    fetchCategoryFilterRestaurantsData
+} from "../../redux/action/restaurant_filter_action_&_reducer";
 
 const Filter = (props) => {
     const dispatch = useDispatch()
-const {category} = useSelector(state => state.topPage)
-const {selectedCategory} = useSelector(state => state.restaurantPage)
+const {category,selectedCity} = useSelector(state => state.topPage)
+const {selectedCategory} = useSelector(state => state.filter)
     const getCategoryHandler = async (category) => {
-           await dispatch(getRestaurantsCategory(category))
+        if(selectedCity === 'Выбрать город'){
+            await dispatch(fetchCategoryFilterRestaurantsData(category))
+        }else {
+            await dispatch(fetchCategoryAndCityFilterRestaurantsData(category,selectedCity))
+        }
             props.navigation.push('Категория',category+ ' ' + 'бары')
 
     }

@@ -24,7 +24,7 @@ export const TableReservationPage = (props) => {
             <ScrollView contentContainerStyle={{paddingVertical: 1}}>
         <View style={styles.container}>
             <View>
-                    <TableItem {...props} setTableId={setTableId} tableId={tableId} data={room.data} table_x={room.table_x} background_img={room.background_img}/>
+                    <TableItem {...props} setTableId={setTableId} tableId={tableId} data={room.data} table_x={room.table_x} table_y={room.table_y} background_img={room.background_img}/>
             </View>
             <View style={styles.resDate}>
                 <Text style={styles.text}>Дата и время бронирования</Text>

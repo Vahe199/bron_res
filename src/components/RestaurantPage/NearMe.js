@@ -10,7 +10,7 @@ import {ButtonList} from "./ButtonList/ButtonList";
 import Splash from "../Utils/Splash";
 
 function NearMe(props) {
-    const {restaurant,loading} = useSelector(state => state.nearMe)
+    const {restaurant,loading} = useSelector(state => state.filter)
 
     if (loading) {
         return <Splash/>

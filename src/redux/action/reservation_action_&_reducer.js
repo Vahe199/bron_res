@@ -37,7 +37,6 @@ export const fetchReservationData = (formData) => async (dispatch) => {
     try {
         dispatch({type:SEND_RESERVATION_DATA})
         const {data} = await restaurantsApi.sendReservationData(formData)
-        console.log(data,'data')
        dispatch({type:SEND_RESERVATION_DATA_SUCCESS, payload:data,bool:true})
     }catch (e) {
         dispatch({type:SEND_RESERVATION_DATA_ERROR})

@@ -5,18 +5,18 @@ import Filter from "../Utils/Filter";
 import CardItem from "./CardItem";
 import {useSelector} from "react-redux";
 import {CityFilter} from "../Utils/CityFilter";
+import Splash from "../Utils/Splash";
 
 
 const CategoryScreen = (props) => {
-  const { restaurant,title} = useSelector(state => state.restaurantPage)
+    const {restaurant,loading} = useSelector(state => state.filter)
 
-    return(
-
-        <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={styles.root}>
+    return(loading ? <Splash/>:
+            <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={styles.root}>
             <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
             <View style={styles.container} >
                 <View style={{alignItems:'flex-end',marginBottom:-25}}>
-                    <CityFilter/>
+                    <CityFilter {...props}/>
                 </View>
                 <View style={styles.filter}>
                     <Filter {...props}/>

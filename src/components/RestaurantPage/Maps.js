@@ -9,7 +9,7 @@ import {MARKER_IMG_API} from "@env";
 
 
 const MapsScreen = (props) => {
-    const {latitude,longitude,loading,restaurant} = useSelector(state => state.nearMe)
+    const {latitude,longitude,loading,restaurant} = useSelector(state => state.filter)
     const marcRef = React.useRef()
     if (loading) {
         return <Splash/>

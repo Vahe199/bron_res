@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, View, Text, TouchableOpacity,ScrollView} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
 import {changeSelectedCity} from "../../redux/action/top_restaurant_action_&_reducer";
+import {fetchCityFilterRestaurantsData} from "../../redux/action/restaurant_filter_action_&_reducer";
 
 export const CityFilter = (props) => {
     const dispatch = useDispatch()
@@ -16,7 +17,10 @@ export const CityFilter = (props) => {
     const onPressItem = async (city) => {
         setIsModalVisible(false)
         dispatch(changeSelectedCity(city))
-        props.navigation.push('Категория', city)
+        await dispatch(fetchCityFilterRestaurantsData(city))
+        if(props.route.name != 'Категория'){
+            props.navigation.push('Категория', city)
+        }
     }
     return (
         <View style={styles.container} >

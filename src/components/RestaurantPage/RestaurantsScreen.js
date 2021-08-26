@@ -14,7 +14,6 @@ import {CityFilter} from "../Utils/CityFilter";
 import {ButtonList} from "./ButtonList/ButtonList";
 import {changeSelectedCity, fetchTopPageData} from "../../redux/action/top_restaurant_action_&_reducer";
 import Splash from "../Utils/Splash";
-import {getRestaurantsCategory} from "../../redux/action/restaurant_action_&_reducer";
 
 
 function RestaurantsScreen(props) {
@@ -23,7 +22,6 @@ function RestaurantsScreen(props) {
     useFocusEffect(
         React.useCallback(() => {
             dispatch(fetchTopPageData())
-            dispatch(getRestaurantsCategory(''))
             dispatch(changeSelectedCity('Выбрать город'))
             LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
             return () => null;
