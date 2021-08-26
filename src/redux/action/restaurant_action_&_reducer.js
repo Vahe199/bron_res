@@ -86,7 +86,7 @@ export const getRestaurantsCategory = (category) => async (dispatch) => {
         try {
             dispatch({type:GET_RESTAURANT_DATA})
              const response = category
-                 // await axios.get('')
+
              dispatch({type:GET_RESTAURANT_DATA_SUCCESS, payload:response})
         }catch (e) {
             dispatch({type:GET_RESTAURANT_DATA_ERROR})

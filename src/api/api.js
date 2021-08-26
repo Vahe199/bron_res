@@ -1,6 +1,4 @@
 import axios from "axios";
-import RestaurantsScreen from "../components/RestaurantPage/RestaurantsScreen";
-import {individualRestaurantReducer} from "../redux/action/individualrestaurant-action";
 
 
 const instance = axios.create(
@@ -21,5 +19,11 @@ export const restaurantsApi = {
     },
     getIndividualRestData(id){
         return instance.get(`restoran/${id}`)
+    },
+    sendReservationData(data){
+        return instance.post('/reservation', data)
+    },
+    fetchRestaurantsNearMe(latitude,longitude){
+        return instance.get(`restoran/lant_long/${latitude}/${longitude}`)
     }
 }

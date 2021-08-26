@@ -1,7 +1,7 @@
 import React from "react";
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import {getRestaurantsCategory} from "../../redux/action/restaurant-action";
+import {getRestaurantsCategory} from "../../redux/action/restaurant_action_&_reducer";
 
 const Filter = (props) => {
     const dispatch = useDispatch()

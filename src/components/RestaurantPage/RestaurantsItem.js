@@ -2,8 +2,8 @@ import React from "react";
 import {StyleSheet, Text, View, Image, TouchableOpacity, FlatList} from "react-native";
 import { Divider} from 'react-native-elements'
 import {REST_LOGO_API} from "@env"
-import {useDispatch, useSelector} from "react-redux";
-import {getIndividualRestaurantsData} from "../../redux/action/individualrestaurant-action";
+import {useDispatch} from "react-redux";
+import {getIndividualRestaurantsData} from "../../redux/action/individualrestaurant_action_&_reducer";
 import logo from "../../../assets/logo.png"
 function RestItem({restaurant,navigation}) {
     const dispatch = useDispatch()
@@ -22,7 +22,7 @@ const individualRestHandler = async (resName,id) => {
                                   <Image
                                       style={styles.image}
                                       resizeMode="cover"
-                                      source={ logo/* { uri: `${REST_LOGO_API}${item.logo}` }*/}
+                                      source={item.logo? { uri:`${REST_LOGO_API}${item.logo}`}:logo}
                                   />
                                   <Divider orientation="vertical" width={2} style={styles.divider} />
                                   <View style={styles.textContainer}>
@@ -61,7 +61,7 @@ const styles= StyleSheet.create({
         flexDirection:'row',
         backgroundColor:'#fefefe',
         justifyContent: 'space-between',
-        alignItems: 'flex-end',
+        alignItems: 'center',
         borderRadius:15,
         borderWidth:0,
          padding:10,
@@ -82,6 +82,7 @@ const styles= StyleSheet.create({
         height:60
     },
     imageIcon:{
+        marginTop:35,
         width:30,
         height:30
     },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
     StyleSheet,
     Text,
@@ -11,38 +11,48 @@ import {
     Pressable
 } from "react-native";
 import {Formik} from 'formik';
-import * as Yup from "yup";
 import close from "../../../../../assets/images/close.png"
+import {SignupSchema} from "../../../Utils/ValidationForm";
+import {fetchReservationData, returnToOriginState} from "../../../../redux/action/reservation_action_&_reducer";
+import {useDispatch, useSelector} from "react-redux";
 
-const phoneRegExp = /^(\+\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
-const SignupSchema = Yup.object().shape({
-    name: Yup.string()
-        .required('Обязательное поле'),
-    phone: Yup.string()
-        .matches(phoneRegExp, 'Номер телефона недействителен')
-        .min(12, 'Номер телефона недействителен')
-        .max(18, 'Номер телефона недействителен')
-        .required('Обязательное поле'),
-});
-export const ReserveForm = ({navigation}) => {
+export const ReserveForm = ({navigation,tableId,date,count}) => {
+    const dispatch = useDispatch()
     const width = Dimensions.get('window').width;
-    const [animatedTime, setAnimatedTime] = React.useState(true)
-    const sendFormData = (values) => {
-        navigation.push('Подтверждение')
-        setAnimatedTime(true)
-        Animated.sequence([
-            Animated.timing(opacity,{
-                toValue:1,
-                duration:200,
-                useNativeDriver:true
-            }),
-            Animated.delay(10000),
-            Animated.timing(opacity,{
-                toValue:0,
-                duration:200,
-                useNativeDriver:true
-            })
-        ]).start()
+    const {errors,success} = useSelector(state =>state.reservation)
+    const [animatedTime, setAnimatedTime] = React.useState(false)
+
+    useEffect(()=>{
+        if(errors) {
+            setAnimatedTime(true)
+            Animated.sequence([
+                Animated.timing(opacity, {
+                    toValue: 1,
+                    duration: 200,
+                    useNativeDriver: true
+                }),
+                Animated.delay(5000),
+                Animated.timing(opacity, {
+                    toValue: 0,
+                    duration: 200,
+                    useNativeDriver: true
+                })
+            ]).start()
+            dispatch(returnToOriginState())
+        }
+        if(success == 1){
+            navigation.push('Подтверждение')
+        }
+    },[errors,success])
+    const sendFormData = async (values) => {
+        let {name, phone} = values
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('phone', phone);
+        formData.append('tableId', tableId);
+        formData.append('date', date);
+        formData.append('guests', count);
+         await dispatch(fetchReservationData(formData))
     }
     const opacity = React.useRef(new Animated.Value(0)).current;
     return (
@@ -66,7 +76,7 @@ export const ReserveForm = ({navigation}) => {
                 </Animated.View>}
                 <Formik
                     initialValues={{name: '', phone: ''}}
-                     validationSchema={SignupSchema}
+                     // validationSchema={SignupSchema}
                     onSubmit={(values, action) => {
                         sendFormData(values)
                         action.resetForm();

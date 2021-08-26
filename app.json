@@ -23,7 +23,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": ["ACCESS_BACKGROUND_LOCATION"],
+      "package": "com.webex2019.RestaurantWeb"
     },
     "web": {
       "favicon": "./assets/logo.png"

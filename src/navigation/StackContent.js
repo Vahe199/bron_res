@@ -4,7 +4,7 @@ import ContactUsScreen from "../components/Drawer/ContactUsScreen";
 import AboutScreen from "../components/Drawer/AboutScreen";
 import MapsScreen from "../components/RestaurantPage/Maps";
 import SupportScreen from "../components/Drawer/Sopport/SupportScreen";
-import {Header} from "../components/Include/Header";
+import {Header} from "../components/Utils/Header";
 import RestaurantsScreen from "../components/RestaurantPage/RestaurantsScreen";
 import NearMe from "../components/RestaurantPage/NearMe";
 import CategoryScreen from "../components/Category/CategoryScreen";

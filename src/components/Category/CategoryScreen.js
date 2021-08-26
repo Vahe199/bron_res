@@ -1,10 +1,10 @@
 import React from "react";
 import {FlatList, ImageBackground, ScrollView, StyleSheet, View} from "react-native";
-import {Header} from "../Include/Header";
-import Filter from "../Include/Filter";
+import {Header} from "../Utils/Header";
+import Filter from "../Utils/Filter";
 import CardItem from "./CardItem";
 import {useSelector} from "react-redux";
-import {CityFilter} from "../Include/CityFilter";
+import {CityFilter} from "../Utils/CityFilter";
 
 
 const CategoryScreen = (props) => {

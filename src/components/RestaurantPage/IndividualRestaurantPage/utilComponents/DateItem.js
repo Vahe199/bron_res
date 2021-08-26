@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Platform, Text, StyleSheet, Image} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import calendar from "../../../../../assets/images/calendar.png"
 import {Divider} from "react-native-elements";
 import {TouchableOpacity} from "react-native-gesture-handler";
 
-export const DateFilter = () => {
+export const DateFilter = (props) => {
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('');
     const [show, setShow] = useState(false);
     const [time, setTime] = useState(new Date());
-
 
     const onChange = (event, selectedValue) => {
         setShow(Platform.OS === 'ios');
@@ -37,12 +36,15 @@ export const DateFilter = () => {
     const showDatepicker = () => {
         if(Platform.OS == "android"){
             showMode('date');
-            console.log(Platform)
         }else {
             showMode('datetime');
         }
     };
-    const dateta = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}/${time.getHours()}:${time.getHours()}`
+    const resDate = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}/${time.getHours()}:${time.getHours()}`
+
+    useEffect(()=>{
+        props.setDate(resDate)
+    },[date,time])
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={showDatepicker} style={styles.pickedDateContainer} activeOpacity={0.7}>

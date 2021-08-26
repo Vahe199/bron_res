@@ -9,12 +9,12 @@ import {
 import { useFocusEffect } from '@react-navigation/native';
 import {useDispatch, useSelector} from "react-redux";
 import RestItem from "./RestaurantsItem";
-import Filter from "../Include/Filter";
-import {CityFilter} from "../Include/CityFilter";
+import Filter from "../Utils/Filter";
+import {CityFilter} from "../Utils/CityFilter";
 import {ButtonList} from "./ButtonList/ButtonList";
-import {changeSelectedCity, fetchTopPageData} from "../../redux/action/topRestaurant-action";
-import Splash from "../Include/Splash";
-import {getRestaurantsCategory} from "../../redux/action/restaurant-action";
+import {changeSelectedCity, fetchTopPageData} from "../../redux/action/top_restaurant_action_&_reducer";
+import Splash from "../Utils/Splash";
+import {getRestaurantsCategory} from "../../redux/action/restaurant_action_&_reducer";
 
 
 function RestaurantsScreen(props) {

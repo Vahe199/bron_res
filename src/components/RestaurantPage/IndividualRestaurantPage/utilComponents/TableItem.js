@@ -1,17 +1,12 @@
 import React from "react";
 import {FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View} from "react-native";
-import {Table,Cell,TableWrapper} from "@deb-95/react-native-table-component";
-import table3 from "../../../../../assets/images/table/table3.png"
-import table4 from "../../../../../assets/images/table/table4.png"
-import table6 from "../../../../../assets/images/table/table6.png"
-import table8 from "../../../../../assets/images/table/table8.png"
 import {Image} from "react-native-elements";
 import {useSelector} from "react-redux";
 import {DataTable} from "react-native-paper";
 import CardItem from "../../../Category/CardItem";
 import {BACKGROUND_IMG_URL,TABLE_IMG_URL} from "@env"
 
-export const TableItem = ({data,table_x, background_img}) => {
+export const TableItem = ({data,table_x, background_img,setTableId,tableId}) => {
     let width = useWindowDimensions().width;
     //  const  table = [
     // {id:1,chair:3,img:table3,x:1,y:1}, {id:2,chair:4,img:table4,x:1,y:2}, {}, {id:3,chair:8,img:table8,x:1,y:4},{id:4,chair:6,img:table6,x:1,y:5 },
@@ -22,7 +17,6 @@ export const TableItem = ({data,table_x, background_img}) => {
     //
     //      ]
 
-    const [tableId, setTableId] = React.useState('')
     const choseTable = (id) => {
         setTableId(id)
         // props.navigation.push('Reservation Table',`Table ${data}`);

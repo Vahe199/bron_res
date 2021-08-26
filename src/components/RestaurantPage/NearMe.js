@@ -2,16 +2,19 @@ import React from "react";
 import {
     View,
     StyleSheet,
-    TouchableOpacity,
-    ImageBackground, Dimensions, ScrollView
+    ImageBackground, ScrollView
 } from "react-native";
 import RestItem from "./RestaurantsItem";
 import {useSelector} from "react-redux";
 import {ButtonList} from "./ButtonList/ButtonList";
+import Splash from "../Utils/Splash";
 
 function NearMe(props) {
-    const {rest} = useSelector(state => state.topPage)
+    const {restaurant,loading} = useSelector(state => state.nearMe)
 
+    if (loading) {
+        return <Splash/>
+    }
     return (
         <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={{flex:1}}>
             <View style={styles.container}>
@@ -21,7 +24,7 @@ function NearMe(props) {
                 <View style={{marginTop:50}}>
                     <ScrollView showsVerticalScrollIndicator={false}
                         contentContainerStyle={{paddingVertical:20}}>
-                        <RestItem restaurant={rest} {...props}/>
+                        <RestItem restaurant={restaurant} {...props}/>
                     </ScrollView>
                 </View>
             </View>

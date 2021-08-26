@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, View, Text, TouchableOpacity,ScrollView} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
-import {changeSelectedCity} from "../../redux/action/topRestaurant-action";
+import {changeSelectedCity} from "../../redux/action/top_restaurant_action_&_reducer";
 
 export const CityFilter = (props) => {
     const dispatch = useDispatch()

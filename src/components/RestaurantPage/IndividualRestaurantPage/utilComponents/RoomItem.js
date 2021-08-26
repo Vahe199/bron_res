@@ -9,9 +9,9 @@ import {
     ScrollView, ImageBackground
 } from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import Splash from "../../../Include/Splash";
+import Splash from "../../../Utils/Splash";
 import {TableItem} from "./TableItem";
-import {fetchRoomItem} from "../../../../redux/action/individualrestaurant-action";
+import {fetchRoomItem} from "../../../../redux/action/individualrestaurant_action_&_reducer";
 
 
 export const RoomItem = (props) => {

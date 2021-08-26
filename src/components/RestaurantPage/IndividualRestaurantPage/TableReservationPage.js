@@ -15,19 +15,20 @@ import {useSelector} from "react-redux";
 
 export const TableReservationPage = (props) => {
     const {room} = useSelector(state => state.individualPage);
-     console.log(room,'room')
     const [count, setCount] = React.useState(4)
+    const [date, setDate] = React.useState('')
+    const [tableId, setTableId] = React.useState(null)
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
         <SafeAreaView style={{flex: 1}}>
             <ScrollView contentContainerStyle={{paddingVertical: 1}}>
         <View style={styles.container}>
             <View>
-                    <TableItem {...props} data={room.data} table_x={room.table_x} background_img={room.background_img}/>
+                    <TableItem {...props} setTableId={setTableId} tableId={tableId} data={room.data} table_x={room.table_x} background_img={room.background_img}/>
             </View>
             <View style={styles.resDate}>
                 <Text style={styles.text}>Дата и время бронирования</Text>
-                   <DateFilter {...props}/>
+                   <DateFilter setDate={setDate} {...props}/>
             </View>
             <View style={styles.numGuest}>
                 <Text style={styles.text}>Количество гостей</Text>
@@ -44,7 +45,7 @@ export const TableReservationPage = (props) => {
                 </View>
             </View>
             <View style={styles.reserveForm}>
-                 <ReserveForm {...props}/>
+                 <ReserveForm count={count} tableId={tableId} date={date} {...props}/>
             </View>
         </View>
             </ScrollView>
