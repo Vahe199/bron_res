@@ -38,7 +38,7 @@ export const restaurantsApi = {
     fetchRestaurantsWithSearch(searchValue){
         return instance.get(`/search/${searchValue}`)
     },
-    fetchEmail(data){
-        return instance.post(`/support/`, data)
+    fetchMessageToSupport(data){
+        return instance.post(`/support`, data)
     }
 }

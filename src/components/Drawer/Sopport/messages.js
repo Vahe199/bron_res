@@ -1,7 +1,10 @@
-import React from "react";
-import {ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import React, { useEffect } from "react";
+import {ImageBackground, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Alert} from "react-native";
 import {Formik} from 'formik';
 import * as Yup from "yup";
+import { changeToDefaultMessages, fetchSupportData } from "../../../redux/action/support_action_&_reducer";
+import { useDispatch, useSelector } from "react-redux";
+import ModalSupport from "./ModalSupport";
 
 const SignupSchema = Yup.object().shape({
     email: Yup.string()
@@ -17,14 +20,42 @@ const SignupSchema = Yup.object().shape({
         .required('Обязательное поле'),
 });
 export const Form = () => {
+
+    const {massages} = useSelector(state => state.support)
+    let dispatch = useDispatch();
+
+    useEffect(() => {
+        setTimeout(() => {
+            dispatch(changeToDefaultMessages());
+        }, 2000)
+    }, [massages])
+
+
+
+
+
+    const sendFormData = async (values) => {
+        let {email, subject, message} = values
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('subject', subject);
+        formData.append('message', message);
+        //console.log(formData);
+        await dispatch(fetchSupportData(formData))
+    }
+    
+
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
+            {massages !== '' && <ModalSupport title={'Поздравляю'} text={'Ваше сообщение успешно доставлено'} />}
+            
         <ScrollView>
             <View style={styles.container}>
                 <Formik
                     initialValues={{email: '', subject: '', message: ''}}
                    validationSchema={SignupSchema}
                     onSubmit={(values, action) => {
+                        sendFormData(values)
                         action.resetForm()
                     }}
                 >
