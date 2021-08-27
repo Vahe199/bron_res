@@ -35,4 +35,10 @@ export const restaurantsApi = {
     fetchCategoryAndCityRestaurants(category,city){
         return instance.get(`/restoran/${category}/${city}'`)
     },
+    fetchRestaurantsWithSearch(searchValue){
+        return instance.get(`/search/${searchValue}`)
+    },
+    fetchEmail(data){
+        return instance.post(`/support/`, data)
+    }
 }
