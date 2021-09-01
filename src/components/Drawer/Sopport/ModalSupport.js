@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { changeToDefaultMessages } from "../../../redux/action/support_action_&_reducer";
+
 
 
     const ModalSupport = (props) => {
 
-    
- 
         return (
             <View style={styles.modalContainer}>
                 <View style={styles.modalHeader}>
@@ -20,7 +17,7 @@ import { changeToDefaultMessages } from "../../../redux/action/support_action_&_
 
 export default ModalSupport;
 
-    
+
 
 const styles = StyleSheet.create({
     modalContainer: {

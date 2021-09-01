@@ -1,9 +1,9 @@
 import axios from "axios";
-
+import {REST_API_URL} from "@env"
 
 const instance = axios.create(
     {
-        baseURL: "https://restoran.fab.nu/",
+        baseURL: `${REST_API_URL}`,
         headers: {
             'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8;application/json',
             'Access-Control-Allow-Origin' : '*',

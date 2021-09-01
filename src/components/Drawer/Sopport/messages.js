@@ -5,20 +5,9 @@ import * as Yup from "yup";
 import { changeToDefaultMessages, fetchSupportData } from "../../../redux/action/support_action_&_reducer";
 import { useDispatch, useSelector } from "react-redux";
 import ModalSupport from "./ModalSupport";
+import {SupportSchemaValidate} from "../../Utils/ValidationForm";
 
-const SignupSchema = Yup.object().shape({
-    email: Yup.string()
-        .email('Неверный адрес эл. почты')
-        .required('Обязательное поле'),
-    subject: Yup.string()
-        .min(2, 'Слишком короткий!')
-        .max(70, 'Слишком долго!')
-        .required('Обязательное поле'),
-    message: Yup.string()
-        .min(2, 'Слишком короткий!')
-        .max(200, 'Слишком долго!')
-        .required('Обязательное поле'),
-});
+
 export const Form = () => {
 
     const {massages} = useSelector(state => state.support)
@@ -43,17 +32,17 @@ export const Form = () => {
         //console.log(formData);
         await dispatch(fetchSupportData(formData))
     }
-    
+
 
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
             {massages !== '' && <ModalSupport title={'Поздравляю'} text={'Ваше сообщение успешно доставлено'} />}
-            
+
         <ScrollView>
             <View style={styles.container}>
                 <Formik
                     initialValues={{email: '', subject: '', message: ''}}
-                   validationSchema={SignupSchema}
+                   validationSchema={SupportSchemaValidate}
                     onSubmit={(values, action) => {
                         sendFormData(values)
                         action.resetForm()

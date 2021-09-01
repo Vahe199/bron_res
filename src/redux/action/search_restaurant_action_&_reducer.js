@@ -10,28 +10,9 @@ let initialState = {
     searchRestaurants: [],
     error: null,
     loading: false,
-    test: [
-        // {
-        //     restaurant_name: '15484484',
-        //     address: '44828'
-        // },
-        // {
-        //     restaurant_name: '1548dcdx4484',
-        //     address: '4482cvdvd8'
-        // },
-        // {
-        //     restaurant_name: '1548fbvx4484',
-        //     address: 'sdasac'
-        // },
-        // {
-        //     restaurant_name: 'acsad',
-        //     address: 'cassc'
-        // }
-    ]
 };
 
 export const searchRestaurantsReducer = (state = initialState, action) => {
-    //console.log(state.searchRestaurants);
     switch (action.type) {
         case GET_RESTAURANT_FILTER_DATA:
             return {error: null, loading: true};
@@ -52,7 +33,6 @@ export const getRestaurantsWithSearch = (text) => async (dispatch) =>{
     try {
         dispatch({type:GET_RESTAURANT_FILTER_DATA})
         const {data} = await restaurantsApi.fetchRestaurantsWithSearch(text)
-        //console.log(data)
         dispatch({type:GET_RESTAURANT_FILTER_SUCCESS,payload:data})
     }catch (e) {
         dispatch({type:GET_RESTAURANT_FILTER_ERROR})

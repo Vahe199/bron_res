@@ -10,7 +10,7 @@ import logo from "../../../assets/logo.png";
 function RestItem({restaurant,navigation}) {
     const dispatch = useDispatch()
 const individualRestHandler = async (resName,id) => {
-    await dispatch(getIndividualRestaurantsData(resName,10000006))
+    await dispatch(getIndividualRestaurantsData(resName,id))
      navigation.push('Индивидуальный рест',resName)
 }
     return (

@@ -11,8 +11,9 @@ import { getRestaurantsWithSearch } from "../../redux/action/search_restaurant_a
 
 
 export const Header = (props) => {
-    
 
+    const {topRest} = useSelector(state => state.topPage)
+    const {searchRestaurants} = useSelector(state => state.search)
 
     const [searchQuery, setSearchQuery] = React.useState('');
     const [searchShow, setSearchShow] = React.useState(false);
@@ -20,53 +21,33 @@ export const Header = (props) => {
     const [masterData, setMasterData] = React.useState([]);
     const {restaurant_name,phone} = useSelector(state => state.individualPage)
     let dispatch = useDispatch();
-    const {topRest} = useSelector(state => state.topPage)
+
     const dialCall = (number) => {
         let phoneNumber = '';
         if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
         else {phoneNumber = `telprompt:${number}`; }
         Linking.openURL(phoneNumber);
     };
-    const searchFilter = (text) => {
-        setSearchQuery(text)
-        //console.log(text);
-        dispatch(getRestaurantsWithSearch(text));
-        // if (text) {
-        //     const newData = masterData.filter((item) => {
-        //         const itemData = item.title ?
-        //             item.title.toUpperCase() : ''.toUpperCase();
-        //         const textData = text.toUpperCase();
-        //         return itemData.indexOf(textData) > -1;
-        //     });
-        //     setFilterData(newData);
-        //     setSearchQuery(text)
-        // } else {
-        //     setFilterData(masterData);
-        //     setSearchQuery(text)
-        // }
+    const searchFilter = async (text) => {
+        if (text) {
+            setSearchQuery(text)
+       await dispatch(getRestaurantsWithSearch(text))
+            setFilterData(searchRestaurants);
+         } else {
+            setFilterData(masterData);
+            setSearchQuery(text)
+        }
     }
 
     const fetchRestaurants = async () => {
-        setSearchShow(!searchShow)
-        setSearchQuery('')
-        
-
-        // if (!searchShow) {
-        //     const apiURL = 'https://jsonplaceholder.typicode.com/posts'
-        //     await fetch(apiURL)
-        //         .then((response) => response.json())
-        //         .then((responseJson) => {
-        //             setFilterData(responseJson)
-        //             setMasterData(responseJson)
-        //         }).catch((error) => {
-        //             console.error(error)
-        //         })
-        //     setSearchShow(true)
-        // }
-        //  else {
-        //     setSearchShow(false);
-        //     setSearchQuery('')
-        // }
+        if (!searchShow) {
+            setFilterData(topRest)
+            setMasterData(topRest)
+            setSearchShow(true)
+        } else {
+            setSearchShow(false);
+            setSearchQuery('')
+        }
     }
     return (
         <View style={styles.container}>
@@ -84,8 +65,8 @@ export const Header = (props) => {
                     {searchShow ? <TextInput style={styles.search}
                                              placeholder="Поиск"
                                              placeholderTextColor={'#fff'}
-                                             onChangeText={searchFilter}
-                                             value={searchQuery}
+                                             onChangeText={text=>searchFilter(text)}
+                                              value={searchQuery}
                     /> : <Text style={styles.headerText}>{props.scene?.route.params?props.scene?.route.params : props.scene?.route.name}</Text>}
                     {props.scene?.descriptor.options.call ? <TouchableOpacity onPress={() =>dialCall(phone)}>
                         <Image source={phoneIcon} style={{width: 27, height: 27}}/>
@@ -96,7 +77,7 @@ export const Header = (props) => {
                 </View>
             </LinearGradient>
             {searchShow && <View style={styles.searchQuery}>
-                <SearchQuery search={fetchRestaurants} searchShow={searchShow} filterData={filterData} topRest={topRest} setSearchShow={setSearchShow} {...props} />
+                <SearchQuery search={fetchRestaurants} searchShow={searchShow} filterData={filterData}  setSearchShow={setSearchShow} {...props} />
             </View>}
         </View>
     )

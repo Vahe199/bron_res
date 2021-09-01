@@ -1,37 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {Dimensions, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import {FlatList, TouchableOpacity} from "react-native-gesture-handler";
-import {useSelector} from "react-redux";
+import {getIndividualRestaurantsData} from "../../redux/action/individualrestaurant_action_&_reducer";
+import {useDispatch} from "react-redux";
 
 export const SearchQuery = (props) => {
-
-    const {searchRestaurants} = useSelector(state => state.search)
-    const [arrayForRender, setArrayForRender] = useState([])
-
-    useEffect(() => {
-        if(searchRestaurants.length > 0){
-            setArrayForRender(searchRestaurants)
-        }else{
-            setArrayForRender(props.topRest)
-        }
-    }, [searchRestaurants])
-
-    let search = (resName) => {
-        props.navigation.push('Индивидуальный рест', resName)
+    const dispatch = useDispatch()
+    const individualRestHandler = async (resName,id) => {
+        await dispatch(getIndividualRestaurantsData(resName,id))
+        props.navigation.push('Индивидуальный рест',resName)
     }
-
-
-
     const ItemView = ({item}) => {
         return(<View style={{flex: 1, minHeight: 50}}>
-            <TouchableOpacity onPress={() => search(item.restaurant_name)} activeOpacity={0.5}>
-                <Text style={styles.itemName}>
-                    {item.restaurant_name}
-                </Text>
-                <Text style={styles.itemAddress}>
-                    {item.address}
-                </Text>
-            </TouchableOpacity>
+                <TouchableOpacity
+                     onPress={() => individualRestHandler(item.restaurant_name,item.id)}
+                                  activeOpacity={0.5}>
+                    <Text style={styles.itemName}>
+                        {item.restaurant_name}
+                    </Text>
+                    <Text style={styles.itemAddress}>
+                        {item.address}
+                    </Text>
+                </TouchableOpacity>
             </View>
 
         )
@@ -44,12 +34,12 @@ export const SearchQuery = (props) => {
     }
     return(
         <SafeAreaView>
-                    <View style={styles.flatList}>
-                    <FlatList data={searchRestaurants}
-                              keyExtractor={(item,index)=>index.toString()}
-                              ItemSeparatorComponent={ItemSeparatorView}
-                              renderItem={ItemView}/>
-                    </View>
+            <View style={styles.flatList}>
+                <FlatList data={props.filterData}
+                          keyExtractor={(item,index)=>index.toString()}
+                          ItemSeparatorComponent={ItemSeparatorView}
+                          renderItem={ItemView}/>
+            </View>
         </SafeAreaView>
     )
 }
@@ -58,10 +48,10 @@ const styles = StyleSheet.create({
     flatList:{
         backgroundColor: '#fff',
         width: Dimensions.get('window').width,
-         height:Dimensions.get('window').height-115,
+        height:Dimensions.get('window').height-115,
     },
     itemName:{
-       backgroundColor: '#fff',
+        backgroundColor: '#fff',
         paddingHorizontal: 10,
         fontSize: 19,
     },
