@@ -7,7 +7,8 @@ import {fetchCityFilterRestaurantsData} from "../../redux/action/restaurant_filt
 
 export const CityFilter = (props) => {
     const dispatch = useDispatch()
-    const {cities,selectedCity} = useSelector(state => state.topPage);
+    const {cities ,selectedCity} = useSelector(state => state.topPage);
+    let cyt = cities ? cities :[]
     const [isModalVisible, setIsModalVisible] = React.useState(false);
     const changeModalVisibility = () => {
         if(isModalVisible){
@@ -32,8 +33,8 @@ export const CityFilter = (props) => {
             {isModalVisible &&
             <View style={styles.modal}>
                 <ScrollView>
-                    {cities.map((city, i) => {
-                        return (
+                    {
+                        [{ id: 0, name: "Все" }, ...cyt].map((city, i) =>(
                             <View style={styles.city}
                                   key={i}>
                                 <TouchableOpacity
@@ -41,8 +42,8 @@ export const CityFilter = (props) => {
                                     <Text style={styles.text}>{city.name}</Text>
                                 </TouchableOpacity>
                             </View>
-                        )
-                    })}
+                        ))
+                    }
                 </ScrollView>
             </View>}
         </View>
