@@ -76,17 +76,14 @@ export const fetchFilterRestoransWithCityName = (cityName) => async (dispatch) =
 
 //send response only categories name
 export const fetchFilterRestoransWithCategorys = (categoryName, cityName) => async (dispatch) => {
-    console.log(cityName === 'Выбрать город');
     try {
         dispatch({type:GET_RESTAURANT_DATA})
         if(cityName === 'Выбрать город'){
             const {data} = await restaurantsApi.getFilterWithCategory(categoryName)
             dispatch({type:GET_RESTAURANT_DATA_SUCCESS, payload:data})
-            console.log(data, 'qaxaqov');
         }else{
             const {data} = await restaurantsApi.getFilterWithCityAndCategory(categoryName, cityName)
             dispatch({type:GET_RESTAURANT_DATA_SUCCESS, payload:data})
-            console.log(data, 'arandz qaxaqi');
         }
     }catch (e) {
         dispatch({type:GET_RESTAURANT_DATA_ERROR})
