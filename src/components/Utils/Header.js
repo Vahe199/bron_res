@@ -31,9 +31,11 @@ export const Header = (props) => {
     const searchFilter = async (text) => {
         if (text) {
             setSearchQuery(text)
-       await dispatch(getRestaurantsWithSearch(text))
+
+            await dispatch(getRestaurantsWithSearch(text))
             setFilterData(searchRestaurants);
-         } else {
+        } else {
+
             setFilterData(masterData);
             setSearchQuery(text)
         }
@@ -66,13 +68,15 @@ export const Header = (props) => {
                                              placeholder="Поиск"
                                              placeholderTextColor={'#fff'}
                                              onChangeText={text=>searchFilter(text)}
-                                              value={searchQuery}
+
+                                             value={searchQuery}
+
                     /> : <Text style={styles.headerText}>{props.scene?.route.params?props.scene?.route.params : props.scene?.route.name}</Text>}
                     {props.scene?.descriptor.options.call ? <TouchableOpacity onPress={() =>dialCall(phone)}>
-                        <Image source={phoneIcon} style={{width: 27, height: 27}}/>
+                            <Image source={phoneIcon} style={{width: 27, height: 27}}/>
                         </TouchableOpacity>
                         :props.scene?.descriptor.options.arrowBack ?  <Image source={transparent} style={{width: 27, height: 27}}/>
-                   : <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>
+                            : <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>
                     }
                 </View>
             </LinearGradient>
