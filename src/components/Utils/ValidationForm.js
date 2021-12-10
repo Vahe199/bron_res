@@ -10,3 +10,18 @@ export const SignupSchema = Yup.object().shape({
         .max(18, 'Номер телефона недействителен')
         .required('Обязательное поле'),
 });
+
+
+export const SupportSchemaValidate = Yup.object().shape({
+    email: Yup.string()
+        .email('Неверный адрес эл. почты')
+        .required('Обязательное поле'),
+    subject: Yup.string()
+        .min(2, 'Слишком короткий!')
+        .max(70, 'Слишком долго!')
+        .required('Обязательное поле'),
+    message: Yup.string()
+        .min(2, 'Слишком короткий!')
+        .max(200, 'Слишком долго!')
+        .required('Обязательное поле'),
+});

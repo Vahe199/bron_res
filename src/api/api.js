@@ -1,9 +1,9 @@
 import axios from "axios";
-
+import {REST_API_URL} from "@env"
 
 const instance = axios.create(
     {
-        baseURL: "https://restoran.fab.nu/",
+        baseURL: `${REST_API_URL}`,
         headers: {
             'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8;application/json',
             'Access-Control-Allow-Origin' : '*',
@@ -26,6 +26,7 @@ export const restaurantsApi = {
     fetchRestaurantsNearMe(latitude,longitude){
         return instance.get(`restoran/lant_long/${latitude}/${longitude}`)
     },
+
     getFilterWithCity(cityName){
         return instance.get(`restoran/city/${cityName}`)
     },
@@ -34,6 +35,22 @@ export const restaurantsApi = {
     },
     getFilterWithCityAndCategory(categoryName, cityName){
         return instance.get(`restoran/${categoryName}/${cityName}`)
+
+    fetchCityRestaurants(city){
+        return instance.get(`restoran/city/${city}`)
+    },
+    fetchCategoryRestaurants(category){
+        return instance.get(`category/${category}`)
+    },
+    fetchCategoryAndCityRestaurants(category,city){
+        return instance.get(`/restoran/${category}/${city}'`)
+    },
+    fetchRestaurantsWithSearch(searchValue){
+        return instance.get(`/search/${searchValue}`)
+    },
+    fetchMessageToSupport(data){
+        return instance.post(`/support`, data)
+
     }
 }
 
