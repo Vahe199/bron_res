@@ -22,7 +22,6 @@ export const TableItem = ({data,table_x, background_img}) => {
     //      ]
     const choseTable = (id) => {
         dispatch(setReservationTableIdAC(id))
-        console.log(id)
          // navigation.push('Reservation Table',`Table ${data}`);
     }
 

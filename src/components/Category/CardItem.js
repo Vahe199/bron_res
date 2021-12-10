@@ -1,18 +1,23 @@
 import React from "react";
 import {StyleSheet, Text, View, Image, TouchableOpacity} from "react-native";
 import {Card} from 'react-native-elements'
+import {REST_IMG_API} from "@env";
+import {useDispatch} from "react-redux";
+import {getIndividualRestaurantsData} from "../../redux/action/individualrestaurant_action_&_reducer";
 function CardItem({ el,navigation}) {
-    const longPressHandler = () => {
-        navigation.push('Индивидуальный рест',el.name)
+    const dispatch = useDispatch()
+    const longPressHandler = async (resName,id) => {
+        await dispatch(getIndividualRestaurantsData(resName,id))
+        navigation.push('Индивидуальный рест',resName)
     }
     return (
         <TouchableOpacity activeOpacity={0.9}
-                         onPress={longPressHandler}
+                          onPress={()=>longPressHandler(el.restaurant_name, el.id)}
            // onLongPress={longPressHandler}
         >
             <Card containerStyle={styles.card} >
                 <Card.Image style={styles.cardImages}
-                            source={{url: el.img}}/>
+                            source={{uri: `${REST_IMG_API}${el.img}`}}/>
 
                 <View style={styles.cardText}>
                     <View style={styles.text}>

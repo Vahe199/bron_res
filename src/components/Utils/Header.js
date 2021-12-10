@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Image, Linking, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {MaterialIcons} from "@expo/vector-icons";
 import {LinearGradient} from "expo-linear-gradient";
@@ -6,47 +6,43 @@ import arrowBack from "../../../assets/images/Back.png";
 import phoneIcon from "../../../assets/images/phoneIcon.png";
 import transparent from "../../../assets/images/table/transparent.png"
 import {SearchQuery} from "./SearchQuery";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { getRestaurantsWithSearch } from "../../redux/action/search_restaurant_action_&_reducer";
 
 
 export const Header = (props) => {
+
+    const {topRest} = useSelector(state => state.topPage)
+    const {searchRestaurants} = useSelector(state => state.search)
+
     const [searchQuery, setSearchQuery] = React.useState('');
     const [searchShow, setSearchShow] = React.useState(false);
     const [filterData, setFilterData] = React.useState([]);
     const [masterData, setMasterData] = React.useState([]);
     const {restaurant_name,phone} = useSelector(state => state.individualPage)
-  const dialCall = (number) => {
+    let dispatch = useDispatch();
+
+    const dialCall = (number) => {
         let phoneNumber = '';
         if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
         else {phoneNumber = `telprompt:${number}`; }
         Linking.openURL(phoneNumber);
     };
-    const searchFilter = (text) => {
+    const searchFilter = async (text) => {
         if (text) {
-            const newData = masterData.filter((item) => {
-                const itemData = item.title ?
-                    item.title.toUpperCase() : ''.toUpperCase();
-                const textData = text.toUpperCase();
-                return itemData.indexOf(textData) > -1;
-            });
-            setFilterData(newData);
             setSearchQuery(text)
+            await dispatch(getRestaurantsWithSearch(text))
+            setFilterData(searchRestaurants);
         } else {
             setFilterData(masterData);
             setSearchQuery(text)
         }
     }
+
     const fetchRestaurants = async () => {
         if (!searchShow) {
-            const apiURL = 'https://jsonplaceholder.typicode.com/posts'
-            await fetch(apiURL)
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    setFilterData(responseJson)
-                    setMasterData(responseJson)
-                }).catch((error) => {
-                    console.error(error)
-                })
+            setFilterData(topRest)
+            setMasterData(topRest)
             setSearchShow(true)
         } else {
             setSearchShow(false);
@@ -69,19 +65,19 @@ export const Header = (props) => {
                     {searchShow ? <TextInput style={styles.search}
                                              placeholder="Поиск"
                                              placeholderTextColor={'#fff'}
-                                             onChangeText={searchFilter}
+                                             onChangeText={text=>searchFilter(text)}
                                              value={searchQuery}
                     /> : <Text style={styles.headerText}>{props.scene?.route.params?props.scene?.route.params : props.scene?.route.name}</Text>}
                     {props.scene?.descriptor.options.call ? <TouchableOpacity onPress={() =>dialCall(phone)}>
-                        <Image source={phoneIcon} style={{width: 27, height: 27}}/>
+                            <Image source={phoneIcon} style={{width: 27, height: 27}}/>
                         </TouchableOpacity>
                         :props.scene?.descriptor.options.arrowBack ?  <Image source={transparent} style={{width: 27, height: 27}}/>
-                   : <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>
+                            : <MaterialIcons name='search' size={35} onPress={() => fetchRestaurants()} style={styles.icon}/>
                     }
                 </View>
             </LinearGradient>
             {searchShow && <View style={styles.searchQuery}>
-                <SearchQuery search={fetchRestaurants} searchShow={searchShow} filterData={filterData}/>
+                <SearchQuery search={fetchRestaurants} searchShow={searchShow} filterData={filterData}  setSearchShow={setSearchShow} {...props} />
             </View>}
         </View>
     )
