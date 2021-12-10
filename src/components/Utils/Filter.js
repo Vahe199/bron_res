@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
+
 import {
     fetchCategoryAndCityFilterRestaurantsData,
     fetchCategoryFilterRestaurantsData
@@ -16,6 +17,7 @@ const {selectedCategory} = useSelector(state => state.filter)
         }else {
             await dispatch(fetchCategoryAndCityFilterRestaurantsData(category,selectedCity))
         }
+
             props.navigation.push('Категория',category+ ' ' + 'бары')
 
     }
@@ -34,7 +36,7 @@ const {selectedCategory} = useSelector(state => state.filter)
                       keyExtractor={(item,index) => index.toString()}
                       renderItem={({item}) => (
                           <TouchableOpacity activeOpacity={0.5} key={item.id}
-                                            onPress={()=>getCategoryHandler(item.name)}
+                                            onPress={()=>getCategoryHandler(item.name, selectedCity)}
                                             style={selectedCategory === item.name?[styles. FilterBtn,styles.active]:styles. FilterBtn} >
                               <Text style={styles.textBtn}>{item.name}</Text>
                           </TouchableOpacity>

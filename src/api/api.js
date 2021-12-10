@@ -26,6 +26,16 @@ export const restaurantsApi = {
     fetchRestaurantsNearMe(latitude,longitude){
         return instance.get(`restoran/lant_long/${latitude}/${longitude}`)
     },
+
+    getFilterWithCity(cityName){
+        return instance.get(`restoran/city/${cityName}`)
+    },
+    getFilterWithCategory(categoryName){
+        return instance.get(`category/${categoryName}`)
+    },
+    getFilterWithCityAndCategory(categoryName, cityName){
+        return instance.get(`restoran/${categoryName}/${cityName}`)
+
     fetchCityRestaurants(city){
         return instance.get(`restoran/city/${city}`)
     },
@@ -40,5 +50,16 @@ export const restaurantsApi = {
     },
     fetchMessageToSupport(data){
         return instance.post(`/support`, data)
+
     }
 }
+
+
+// Route::get('/restoran/{id}', [RestoranController::class, 'show']);
+// Route::get('/restoran/{category}/{city}', [RestoranController::class, 'filtercategorycity']);
+// Route::get('/restoran/city/{city}', [RestoranController::class, 'city']);
+// Route::get('/room/{restoranid}/{roomname}', [RestoranController::class, 'room']);
+// Route::get('/restoran/lant_long/{latitude}/{longitude}', [RestoranController::class, 'lant_long']);
+// Route::post('/reservation', [RestoranController::class, 'reservation']);
+// 4:03
+// Route::get('/category/{category}', [RestoranController::class, 'category']);

@@ -50,10 +50,12 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         height:Dimensions.get('window').height-115,
     },
+
     itemName:{
         backgroundColor: '#fff',
         paddingHorizontal: 10,
         fontSize: 19,
+
     },
     itemAddress: {
         backgroundColor:'#fff',

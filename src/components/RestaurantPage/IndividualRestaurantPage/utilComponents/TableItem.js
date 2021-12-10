@@ -1,14 +1,22 @@
-import React from "react";
+import React, {useState} from "react";
 import {FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View} from "react-native";
 import {Image} from "react-native-elements";
+import {useDispatch, useSelector} from "react-redux";
+import {DataTable} from "react-native-paper";
+import CardItem from "../../../Category/CardItem";
 import {BACKGROUND_IMG_URL,TABLE_IMG_URL} from "@env"
+import {useNavigation} from "@react-navigation/native";
+import {setReservationTableIdAC} from "../../../../redux/action/reservation_action_&_reducer";
+
 
 export const TableItem = ({data,table_x,table_y, background_img,setTableId,tableId}) => {
     let width = useWindowDimensions().width;
 
+
     const choseTable = (id) => {
-        setTableId(id)
-        // props.navigation.push('Reservation Table',`Table ${data}`);
+        dispatch(setReservationTableIdAC(id))
+        console.log(id)
+         // navigation.push('Reservation Table',`Table ${data}`);
     }
 
 
@@ -22,7 +30,7 @@ export const TableItem = ({data,table_x,table_y, background_img,setTableId,table
                           renderItem={({item}) => (
                               <View style={{margin:5 ,height:250/table_y, width:width/2/(table_x+1)}}>
                                   <TouchableOpacity onPress={() =>choseTable(item.id)} activeOpacity={0.6}>
-                                      <View style={item.img && tableId == item.id ? styles.res:''}>
+                                      <View style={item.img && resTableId == item.id ? styles.res:''}>
                                           <Image
                                               // source={data.img?data.img:trans}
                                               source={{ uri:`${TABLE_IMG_URL}${item.img}`}}

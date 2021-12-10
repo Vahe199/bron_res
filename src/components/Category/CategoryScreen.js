@@ -9,7 +9,9 @@ import Splash from "../Utils/Splash";
 
 
 const CategoryScreen = (props) => {
+
     const {restaurant,loading} = useSelector(state => state.filter)
+
 
     return(loading ? <Splash/>:
             <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={styles.root}>
@@ -25,7 +27,7 @@ const CategoryScreen = (props) => {
 
                     <FlatList numColumns={2}
                               showsVerticalScrollIndicator={false}
-                        data={ restaurant} keyExtractor={(item, index) => index.toString()}
+                        data={restaurant} keyExtractor={(item, index) => index.toString()}
                               renderItem={({item}) => (
                                   <CardItem el={item} key={item.id}{...props}/>
                               )}/>

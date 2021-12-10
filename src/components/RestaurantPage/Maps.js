@@ -28,7 +28,7 @@ const MapsScreen = (props) => {
                      showsMyLocationButton={false}
                      provider={PROVIDER_GOOGLE}>
                 {
-                    restaurant.map((el, index) => {
+                    restaurant?.map((el, index) => {
                         return (
                             <Marker
                                 key={index}

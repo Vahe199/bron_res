@@ -18,7 +18,8 @@ function CardItem({ el,navigation}) {
         >
             <Card containerStyle={styles.card} >
                 <Card.Image style={styles.cardImages}
-                            source={{ uri: `${REST_IMG_API}${el.img}` }}/>
+
+                            source={{ uri: `${REST_IMG_API}${el.img}`
 
                 <View style={styles.cardText}>
                     <View style={styles.text}>

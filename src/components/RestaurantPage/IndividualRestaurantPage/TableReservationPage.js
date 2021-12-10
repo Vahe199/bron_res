@@ -17,13 +17,14 @@ export const TableReservationPage = (props) => {
     const {room} = useSelector(state => state.individualPage);
     const [count, setCount] = React.useState(4)
     const [date, setDate] = React.useState('')
-    const [tableId, setTableId] = React.useState(null)
+    const {resTableId} = useSelector(state => state.reservation)
     return (
         <ImageBackground source={require('../../../../assets/images/pageBackground.png')} style={{flex: 1}}>
         <SafeAreaView style={{flex: 1}}>
             <ScrollView contentContainerStyle={{paddingVertical: 1}}>
         <View style={styles.container}>
             <View>
+
                     <TableItem {...props} setTableId={setTableId} tableId={tableId} data={room.data} table_x={room.table_x} table_y={room.table_y} background_img={room.background_img}/>
             </View>
             <View style={styles.resDate}>
@@ -45,7 +46,7 @@ export const TableReservationPage = (props) => {
                 </View>
             </View>
             <View style={styles.reserveForm}>
-                 <ReserveForm count={count} tableId={tableId} date={date} {...props}/>
+                 <ReserveForm count={count} tableId={resTableId} date={date} {...props}/>
             </View>
         </View>
             </ScrollView>

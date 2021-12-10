@@ -46,9 +46,10 @@ export const ReserveForm = ({navigation,tableId,date,count}) => {
     },[errors,success])
     const sendFormData = async (values) => {
         let {name, phone} = values
+        let phones = phone.replace(/\D/g, '')
         const formData = new FormData();
         formData.append('name', name);
-        formData.append('phone', phone);
+        formData.append('phone', phones);
         formData.append('tableId', tableId);
         formData.append('date', date);
         formData.append('guests', count);
@@ -99,8 +100,14 @@ export const ReserveForm = ({navigation,tableId,date,count}) => {
                                         dataDetectorTypes='phoneNumber'
                                        keyboardType='phone-pad'
                                        autoCompleteType='cc-number'
-                                       placeholder ="+   * (***) *** ** **"
-                                       onChangeText={props.handleChange('phone')}/>
+                                       placeholder ="+7 (999) 999-99-99"
+                                       onChangeText={(text)=> {
+                                           let x = text.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+                                           let num = !x[2] ? x[1] : '+ (' + x[1] + ') ' + x[2] +  (x[3]? '-' + x[3]:x[3]) + (x[4] ? '-' + x[4] : '');
+
+                                           console.log(text)
+                                           props.setFieldValue('phone', num)
+                                       }}/>
                             {props.errors.phone && props.touched.phone ? (
                                 <Text style={[styles.warning,{ bottom:135,}]}>{props.errors.phone}</Text>
                             ) : null}
@@ -154,7 +161,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         marginVertical: 10,
         borderColor:'#e5e5e5',
-        fontSize: 24,
+        fontSize: 20,
         height: 50,
         backgroundColor: '#fff',
         paddingHorizontal: 20
