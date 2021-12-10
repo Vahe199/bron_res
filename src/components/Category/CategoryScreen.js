@@ -8,7 +8,12 @@ import {CityFilter} from "../Utils/CityFilter";
 
 
 const CategoryScreen = (props) => {
-  const { restaurant,title} = useSelector(state => state.restaurantPage)
+  const {title} = useSelector(state => state.restaurantPage)
+
+  //My code
+  const {restaurant} = useSelector(state => state.nearMe)
+  //End
+
 
     return(
 
@@ -25,7 +30,7 @@ const CategoryScreen = (props) => {
 
                     <FlatList numColumns={2}
                               showsVerticalScrollIndicator={false}
-                        data={ restaurant} keyExtractor={(item, index) => index.toString()}
+                        data={restaurant} keyExtractor={(item, index) => index.toString()}
                               renderItem={({item}) => (
                                   <CardItem el={item} key={item.id}{...props}/>
                               )}/>

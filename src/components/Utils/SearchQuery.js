@@ -37,10 +37,10 @@ const styles = StyleSheet.create({
     flatList:{
         backgroundColor: '#fff',
         width: Dimensions.get('window').width,
-         height:Dimensions.get('window').height-115,
+        height:Dimensions.get('window').height-115,
     },
     itemStyle:{
        backgroundColor:'#fff',
-        padding:15,
+       padding:15,
     },
 })

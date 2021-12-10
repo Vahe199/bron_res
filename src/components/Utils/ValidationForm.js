@@ -5,7 +5,7 @@ export const SignupSchema = Yup.object().shape({
     name: Yup.string()
         .required('Обязательное поле'),
     phone: Yup.string()
-        .matches(phoneRegExp, 'Номер телефона недействителен')
+        // .matches(phoneRegExp, 'Номер телефона недействителен')
         .min(12, 'Номер телефона недействителен')
         .max(18, 'Номер телефона недействителен')
         .required('Обязательное поле'),

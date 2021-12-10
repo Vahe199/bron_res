@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {getRestaurantsCategory} from "../../redux/action/restaurant_action_&_reducer";
+import { fetchFilterRestoransWithCategorys } from "../../redux/action/restaurant_filter_action_&_reducer";
 
 const Filter = (props) => {
     const dispatch = useDispatch()
 const {category} = useSelector(state => state.topPage)
 const {selectedCategory} = useSelector(state => state.restaurantPage)
-    const getCategoryHandler = async (category) => {
-           await dispatch(getRestaurantsCategory(category))
+//My code
+const {selectedCity} = useSelector(state => state.nearMe);
+//End
+
+
+
+    const getCategoryHandler =  (category, selectedCity) => {
+            dispatch(fetchFilterRestoransWithCategorys(category, selectedCity))
             props.navigation.push('Категория',category+ ' ' + 'бары')
 
     }
@@ -27,7 +34,7 @@ const {selectedCategory} = useSelector(state => state.restaurantPage)
                       keyExtractor={(item,index) => index.toString()}
                       renderItem={({item}) => (
                           <TouchableOpacity activeOpacity={0.5} key={item.id}
-                                            onPress={()=>getCategoryHandler(item.name)}
+                                            onPress={()=>getCategoryHandler(item.name, selectedCity)}
                                             style={selectedCategory === item.name?[styles. FilterBtn,styles.active]:styles. FilterBtn} >
                               <Text style={styles.textBtn}>{item.name}</Text>
                           </TouchableOpacity>

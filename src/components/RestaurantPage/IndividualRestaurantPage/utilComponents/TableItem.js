@@ -1,13 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import {FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, useWindowDimensions, View} from "react-native";
 import {Image} from "react-native-elements";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {DataTable} from "react-native-paper";
 import CardItem from "../../../Category/CardItem";
 import {BACKGROUND_IMG_URL,TABLE_IMG_URL} from "@env"
+import {useNavigation} from "@react-navigation/native";
+import {setReservationTableIdAC} from "../../../../redux/action/reservation_action_&_reducer";
 
-export const TableItem = ({data,table_x, background_img,setTableId,tableId}) => {
+export const TableItem = ({data,table_x, background_img}) => {
     let width = useWindowDimensions().width;
+    const dispatch = useDispatch()
+    const {resTableId} = useSelector(state => state.reservation)
     //  const  table = [
     // {id:1,chair:3,img:table3,x:1,y:1}, {id:2,chair:4,img:table4,x:1,y:2}, {}, {id:3,chair:8,img:table8,x:1,y:4},{id:4,chair:6,img:table6,x:1,y:5 },
     //          {}, {id:5,chair:6,img:table6,x:2,y:2}, {id:6,chair:4,img:table4,x:2,y:3}, {},{id:8,chair:8,img:table8,x:2,y:5},
@@ -16,10 +20,10 @@ export const TableItem = ({data,table_x, background_img,setTableId,tableId}) => 
     //   {id:16,chair:4,img:table4,x:5,y:1}, {}, {}, {},{id:17,chair:6,img:table6,x:5,y:5}
     //
     //      ]
-
     const choseTable = (id) => {
-        setTableId(id)
-        // props.navigation.push('Reservation Table',`Table ${data}`);
+        dispatch(setReservationTableIdAC(id))
+        console.log(id)
+         // navigation.push('Reservation Table',`Table ${data}`);
     }
 
 
@@ -33,7 +37,7 @@ export const TableItem = ({data,table_x, background_img,setTableId,tableId}) => 
                           renderItem={({item}) => (
                               <View style={{padding:10}}>
                                   <TouchableOpacity onPress={() =>choseTable(item.id)} activeOpacity={0.6}>
-                                      <View style={item.img && tableId == item.id ? styles.res:''}>
+                                      <View style={item.img && resTableId == item.id ? styles.res:''}>
                                           <Image
                                               // source={data.img?data.img:trans}
                                               source={{ uri:`${TABLE_IMG_URL}${item.img}`}}

@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, View, Text, TouchableOpacity,ScrollView} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
-import {changeSelectedCity} from "../../redux/action/top_restaurant_action_&_reducer";
+import { changeSelectedCity, fetchFilterRestoransWithCityName } from "../../redux/action/restaurant_filter_action_&_reducer";
 
 export const CityFilter = (props) => {
     const dispatch = useDispatch()
-    const {cities,selectedCity} = useSelector(state => state.topPage);
+    const {cities=[]} = useSelector(state => state.topPage);
+    //My code
+    const {selectedCity} = useSelector(state => state.nearMe);
+    //End
+
     const [isModalVisible, setIsModalVisible] = React.useState(false);
+
+    useEffect(() => {
+        //console.log(cities[1]);
+    }, [cities])
+
     const changeModalVisibility = () => {
         if(isModalVisible){
             setIsModalVisible(false)
         }else {setIsModalVisible(true)}
     }
     const onPressItem = async (city) => {
+         await dispatch(fetchFilterRestoransWithCityName(city))
         setIsModalVisible(false)
         dispatch(changeSelectedCity(city))
         props.navigation.push('Категория', city)
@@ -28,7 +38,11 @@ export const CityFilter = (props) => {
             {isModalVisible &&
             <View style={styles.modal}>
                 <ScrollView>
-                    {cities.map((city, i) => {
+                    {/* My code */}
+
+                    {[{ "id": -1,
+                        "name": "Все",
+                    },...cities].map((city, i) => {
                         return (
                             <View style={styles.city}
                                   key={i}>
@@ -39,6 +53,7 @@ export const CityFilter = (props) => {
                             </View>
                         )
                     })}
+
                 </ScrollView>
             </View>}
         </View>

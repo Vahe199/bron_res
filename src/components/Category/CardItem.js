@@ -12,11 +12,11 @@ function CardItem({ el,navigation}) {
         >
             <Card containerStyle={styles.card} >
                 <Card.Image style={styles.cardImages}
-                            source={{ uri: el.logo }}/>
+                            source={{url: el.img}}/>
 
                 <View style={styles.cardText}>
                     <View style={styles.text}>
-                        <Text style={styles.name}>{el.name}</Text>
+                        <Text style={styles.name}>{el.restaurant_name}</Text>
                         <Text style={styles.address}>{el.address}</Text>
                     </View>
                     <Image style={styles.imageIcon}
