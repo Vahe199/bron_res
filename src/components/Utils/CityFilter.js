@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {StyleSheet, View, Text, TouchableOpacity,ScrollView} from "react-native";
 import {AntDesign} from "@expo/vector-icons";
+
 import { changeSelectedCity, fetchFilterRestoransWithCityName } from "../../redux/action/restaurant_filter_action_&_reducer";
 
 export const CityFilter = (props) => {
@@ -26,7 +27,10 @@ export const CityFilter = (props) => {
          await dispatch(fetchFilterRestoransWithCityName(city))
         setIsModalVisible(false)
         dispatch(changeSelectedCity(city))
-        props.navigation.push('Категория', city)
+        await dispatch(fetchCityFilterRestaurantsData(city))
+        if(props.route.name != 'Категория'){
+            props.navigation.push('Категория', city)
+        }
     }
     return (
         <View style={styles.container} >
@@ -44,6 +48,7 @@ export const CityFilter = (props) => {
                         "name": "Все",
                     },...cities].map((city, i) => {
                         return (
+
                             <View style={styles.city}
                                   key={i}>
                                 <TouchableOpacity
@@ -51,8 +56,10 @@ export const CityFilter = (props) => {
                                     <Text style={styles.text}>{city.name}</Text>
                                 </TouchableOpacity>
                             </View>
+
                         )
                     })}
+
 
                 </ScrollView>
             </View>}

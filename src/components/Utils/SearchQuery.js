@@ -13,8 +13,10 @@ export const SearchQuery = (props) => {
     const ItemView = ({item}) => {
         return(<View style={{flex: 1, minHeight: 50}}>
                 <TouchableOpacity
+
                     onPress={() => individualRestHandler(item.restaurant_name,item.id)}
                     activeOpacity={0.5}>
+
                     <Text style={styles.itemName}>
                         {item.restaurant_name}
                     </Text>
@@ -64,4 +66,6 @@ const styles = StyleSheet.create({
         marginTop: 3,
         fontSize: 16,
     }
+
 })
+

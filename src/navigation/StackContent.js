@@ -15,10 +15,11 @@ import {
 import {Confirmation} from "../components/RestaurantPage/IndividualRestaurantPage/Confirmation";
 import {IndividualRestaurantPage} from "../components/RestaurantPage/IndividualRestaurantPage/IndividualRestaurantPage ";
 import TermsOfUseScreen from "../components/Drawer/TermsOfUseScreen";
+import {InitialScreen} from "../components/Initial/InitalScreen";
 const Stack = createStackNavigator();
 
 const StackContent = (props) => (
-    <Stack.Navigator headerMode="screen" screenOptions={{
+    <Stack.Navigator initialRouteName="исход" headerMode="screen" screenOptions={{
 
         header:(props)=><Header {...props}/>,
         headerStyle: {
@@ -26,6 +27,7 @@ const StackContent = (props) => (
             height: 100
         }
     }}>
+        <Stack.Screen options={{headerShown: false}} name={"исход"} component={InitialScreen}/>
         <Stack.Screen name={"Рестораны"} component={RestaurantsScreen}/>
         <Stack.Screen name={"Индивидуальный рест"} component={IndividualRestaurantPage}
                       options={{  arrowBack:true,call:true}}/>

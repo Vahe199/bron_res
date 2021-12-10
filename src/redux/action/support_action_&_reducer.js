@@ -18,10 +18,12 @@ export const sendSupportDataReducer = (state = initialState, action) =>{
         case SEND_SUPPORT_DATA:
             return {...state,error: null, loading: true};
         case SEND_SUPPORT_DATA_SUCCESS:
+
             return {...state,error: null,loading: false,
                 errors:action.payload.errors,
                 success:action.payload.success,
                 massages:action.payload.messege};
+
         case SEND_SUPPORT_DATA_ERROR:
             return {error: true,loading: false}
         case CHANGE_TO_DEFAULT_MESSAGES:
@@ -42,4 +44,6 @@ export const fetchSupportData = (formData) => async (dispatch) => {
     }catch (e) {
         dispatch({type:SEND_SUPPORT_DATA_ERROR})
     }
+
 }
+

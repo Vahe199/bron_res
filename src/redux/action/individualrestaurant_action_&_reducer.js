@@ -7,7 +7,6 @@ const  FETCH_ROOM_ITEM = 'FETCH_ROOM_ITEM';
 
 
 let initialState = {
-
     room:[],
     Restaurant:[],
     restaurant_name:'',

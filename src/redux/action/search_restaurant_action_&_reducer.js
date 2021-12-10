@@ -17,7 +17,9 @@ export const searchRestaurantsReducer = (state = initialState, action) => {
         case GET_RESTAURANT_FILTER_DATA:
             return {error: null, loading: true};
         case GET_RESTAURANT_FILTER_SUCCESS:
+
             return {error: null, loading: false,
+
                 searchRestaurants: action.payload.Restaurant};
         case GET_RESTAURANT_FILTER_ERROR:
             return {error: true, loading: false}
@@ -37,4 +39,7 @@ export const getRestaurantsWithSearch = (text) => async (dispatch) =>{
     }catch (e) {
         dispatch({type:GET_RESTAURANT_FILTER_ERROR})
     }
+
 }
+
+

@@ -1,4 +1,3 @@
-import axios from "axios";
 import {restaurantsApi} from "../../api/api";
 
 const  FETCH_HOMEPAGE_DATA = 'FETCH_HOMEPAGE_DATA';

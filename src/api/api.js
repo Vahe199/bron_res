@@ -26,6 +26,7 @@ export const restaurantsApi = {
     fetchRestaurantsNearMe(latitude,longitude){
         return instance.get(`restoran/lant_long/${latitude}/${longitude}`)
     },
+
     getFilterWithCity(cityName){
         return instance.get(`restoran/city/${cityName}`)
     },
@@ -34,6 +35,7 @@ export const restaurantsApi = {
     },
     getFilterWithCityAndCategory(categoryName, cityName){
         return instance.get(`restoran/${categoryName}/${cityName}`)
+
     },
     fetchRestaurantsWithSearch(searchValue){
         return instance.get(`/search/${searchValue}`)
