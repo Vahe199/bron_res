@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "RestaurantWeb",
-    "slug": "RestaurantWeb",
+    "name": "Bron Rest",
+    "slug": "Bron_Rest",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
@@ -17,15 +17,34 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.webex2019.RestaurantWeb",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDltnopHVv_qRBfFMuNsA4d2CysR6ZdYl0"
+      },
+      "infoPlist": {
+        "NSLocationAlwaysUsageDescription": "For displaying car service points around your location please turn on location services.",
+        "NSLocationUsageDescription": "For displaying car service points around your location please turn on location services.",
+        "NSLocationWhenInUseUsageDescription": "For displaying car service points around your location please turn on location services.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "For displaying car service points around your location please turn on location services."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"
       },
-      "permissions": ["ACCESS_BACKGROUND_LOCATION"],
-      "package": "com.webex2019.RestaurantWeb"
+      "package": "com.webex2019.RestaurantWeb",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ],
+      "versionCode": 23,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCj6Ms_kEohqaSkBl7q7suoTjZ2r_oJUXk"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/logo.png"

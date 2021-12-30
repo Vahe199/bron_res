@@ -15,17 +15,19 @@ import {
 import {Confirmation} from "../components/RestaurantPage/IndividualRestaurantPage/Confirmation";
 import {IndividualRestaurantPage} from "../components/RestaurantPage/IndividualRestaurantPage/IndividualRestaurantPage ";
 import TermsOfUseScreen from "../components/Drawer/TermsOfUseScreen";
+import HomeScreen from "../screen/HomeScreen";
 const Stack = createStackNavigator();
 
 const StackContent = (props) => (
-    <Stack.Navigator headerMode="screen" screenOptions={{
-
+    <Stack.Navigator headerMode="screen"  initialRouteName="HomeScreen"
+                     screenOptions={{
         header:(props)=><Header {...props}/>,
         headerStyle: {
             backgroundColor: '#f16708',
             height: 100
         }
     }}>
+        <Stack.Screen name={"HomeScreen"} component={HomeScreen} options={{headerShown: false}}/>
         <Stack.Screen name={"Рестораны"} component={RestaurantsScreen}/>
         <Stack.Screen name={"Индивидуальный рест"} component={IndividualRestaurantPage}
                       options={{  arrowBack:true,call:true}}/>

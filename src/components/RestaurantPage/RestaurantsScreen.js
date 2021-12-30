@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
     StyleSheet,
     ImageBackground,
@@ -16,7 +16,7 @@ import {fetchTopPageData} from "../../redux/action/top_restaurant_action_&_reduc
 import Splash from "../Utils/Splash";
 import {getRestaurantsCategory} from "../../redux/action/restaurant_action_&_reducer";
 import { changeSelectedCity } from "../../redux/action/restaurant_filter_action_&_reducer";
-
+import * as Location from "expo-location";
 
 function RestaurantsScreen(props) {
     const dispatch = useDispatch()
@@ -30,6 +30,21 @@ function RestaurantsScreen(props) {
             return () => null;
         }, [])
     );
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                console.log('Permission to access location was denied');
+                return;
+            }
+            try {
+                let location = await Location.getCurrentPositionAsync({});
+            } catch {
+                location = await Location.getCurrentPositionAsync({});
+            }
+            console.log(location);
+        })();
+    }, []);
 
     return ( loading ? <Splash/>:
         <ImageBackground source={require('../../../assets/images/pageBackground.png')} style={{flex: 1}}>
